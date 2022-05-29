@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "build-dev": "npx webpack --mode development",
-    "test": "jest --coverage --coverageReporters=text"
+    "test": "jest --coverage --coverageReporters=text",
+    "test-watch": "jest --watchAll"
   },
   "author": "",
   "license": "ISC",
