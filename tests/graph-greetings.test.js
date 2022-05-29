@@ -1,4 +1,4 @@
-const greeting = name => `Hello, ${name}!`
+const greeting = (name) => `Hello, ${name}!`;
 
 describe("greeting()", () => {
   it("says hello", () => {
