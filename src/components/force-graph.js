@@ -1,6 +1,7 @@
 import React from "react";
+import d3 from "d3"
 
-export function ForceGraph(props) {
+export function ForceGraph() {
   // define data
   var dataset = {
     nodes: [
