@@ -1,7 +1,9 @@
-const greeting = (name) => `Hello, ${name}!`;
+import React from "react";
 
-describe("greeting()", () => {
-  it("says hello", () => {
-    expect(greeting("Graph")).toBe("Hello, Graph!");
+describe("JSX", () => {
+  it("calls React.createElement", () => {
+    const createElementSpy = jest.spyOn(React, "createElement");
+    <h1>Hello, JSX!</h1>;
+    expect(createElementSpy).toHaveBeenCalledWith("h1", null, "Hello, JSX!");
   });
 });
