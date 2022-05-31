@@ -8,8 +8,8 @@
     "build-dev": "npx webpack --mode development",
     "test": "jest --coverage --coverageReporters=text",
     "test-watch": "jest --watchAll",
-    "lint": "eslint . && prettier-eslint --list-different **/*.js",
-    "format": "prettier-eslint --write **/*.js"
+    "lint": "eslint . && prettier-eslint --list-different ./src/**/*.js",
+    "format": "prettier-eslint --write ./src/**/*.js"
   },
   "author": "",
   "license": "ISC",

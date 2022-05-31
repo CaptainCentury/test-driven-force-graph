@@ -130,5 +130,5 @@ export function ForceGraph() {
     d.fx = null;
     d.fy = null;
   }
-  return <div>PLACEHOLDER</div>// React.createElement("div", null, "PLACEHOLDER");
+  return <div>PLACEHOLDER</div>; // React.createElement("div", null, "PLACEHOLDER");
 }
