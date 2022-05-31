@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function (wallaby) {
   return {
     testFramwork: "jest",
 
@@ -9,5 +9,9 @@ module.exports = function () {
     tests: ["./src/tests/**/*.test.js"],
 
     files: ["**/*.js", "!node_modules/**/*", "!**/*/*.tests.js", "!**/.*"],
+
+    compilers: {
+      "**/*.js": wallaby.compilers.babel(),
+    },
   };
 };
