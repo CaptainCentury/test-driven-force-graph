@@ -10,7 +10,7 @@ import {
   select,
 } from "d3";
 
-export function ForceGraph() {
+export function ForceGraph({ children }) {
   // define data
   var dataset = {
     nodes: [
@@ -134,5 +134,5 @@ export function ForceGraph() {
     d.fx = null;
     d.fy = null;
   }
-  return <div>PLACEHOLDER</div>; // React.createElement("div", null, "PLACEHOLDER");
+  return <div>{children}</div>;
 }
