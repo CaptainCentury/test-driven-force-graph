@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "testEnvironment": "jsdom",
   "scripts": {
     "build-dev": "npx webpack --mode development",
     "test": "jest --coverage --coverageReporters=text",
@@ -17,12 +18,15 @@
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
+    "@testing-library/react": "13.3.0",
+    "@types/d3": "7.4.0",
     "babel-jest": "^28.1.0",
     "babel-loader": "^8.2.5",
     "eslint": "8.16.0",
     "eslint-plugin-jest": "26.4.5",
     "eslint-plugin-react": "7.30.0",
     "jest": "28.1.0",
+    "jest-environment-jsdom": "28.1.0",
     "prettier": "2.6.2",
     "prettier-eslint-cli": "6.0.1",
     "webpack": "5.72.1",
@@ -30,6 +34,7 @@
   },
   "dependencies": {
     "d3": "7.4.4",
+    "d3-force": "3.0.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "serve": "13.0.2"

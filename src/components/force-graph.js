@@ -1,4 +1,14 @@
 import React from "react";
+import { forceSimulation } from "d3-force";
+import {
+  drag,
+  forceCenter,
+  forceLink,
+  forceManyBody,
+  scaleOrdinal,
+  schemeCategory10,
+  select,
+} from "d3";
 
 export function ForceGraph() {
   // define data
@@ -37,20 +47,18 @@ export function ForceGraph() {
   var h = 300;
 
   // init simple force layout
-  var force = d3
-    .forceSimulation(dataset.nodes)
-    .force("charge", d3.forceManyBody())
-    .force("link", d3.forceLink(dataset.edges))
+  var force = forceSimulation(dataset.nodes)
+    .force("charge", forceManyBody())
+    .force("link", forceLink(dataset.edges))
     .force(
       "center",
-      d3
-        .forceCenter()
+      forceCenter()
         .x(w / 2)
         .y(h / 2)
     );
 
   // display
-  var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+  var svg = select("body").append("svg").attr("width", w).attr("height", h);
 
   var edges = svg
     .selectAll("line")
@@ -60,7 +68,7 @@ export function ForceGraph() {
     .style("stroke", "#ccc")
     .style("stroke-width", 1);
 
-  var colors = d3.scaleOrdinal(d3.schemeCategory10);
+  var colors = scaleOrdinal(schemeCategory10);
 
   var nodes = svg
     .selectAll("circle")
@@ -72,11 +80,7 @@ export function ForceGraph() {
       return colors(i);
     })
     .call(
-      d3
-        .drag()
-        .on("start", dragStarted)
-        .on("drag", dragging)
-        .on("end", dragEnded)
+      drag().on("start", dragStarted).on("drag", dragging).on("end", dragEnded)
     );
 
   // simple tooltip
