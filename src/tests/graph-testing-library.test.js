@@ -17,8 +17,8 @@ describe("ForceGraph in React Testing Library", () => {
     const element = screen.getByTestId("element");
     console.log(element);
     expect(element.tagName).toBe("DIV");
-    expect(element.children[0].tagName).toBe("DIV");
-    //expect(element.children[1].tagName).toBe("SVG");
+    expect(element.children[0].tagName).toBe("svg");
+    expect(element.children[1].tagName).toBe("DIV");
   });
 
   it("passes children through", () => {
