@@ -120,6 +120,7 @@ export function ForceGraph({ dataset, children }) {
     <>
       <svg
         ref={svgRef}
+        style={{ borderStyle: "solid", borderWidth: "1px" }}
         width={w + margin.left + margin.right}
         height={h + margin.top + margin.bottom}
       />
