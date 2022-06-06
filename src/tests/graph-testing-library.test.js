@@ -42,7 +42,7 @@ describe("ForceGraph in React Testing Library", () => {
     expect(element.parentElement.tagName).toBe("circle");
   });
 
-  it("updates graph with new data", async () => {
+  it("updates graph with new data", () => {
     const data = {
       nodes: [{ name: "A" }, { name: "B" }, { name: "C" }],
       edges: [
@@ -62,11 +62,15 @@ describe("ForceGraph in React Testing Library", () => {
         { source: 2, target: 3 },
       ],
     };
-    const noDelement = await screen.queryByText("D");
-    expect(noDelement).toBe(null);
+    expect(screen.queryByText("A").parentElement.tagName).toBe("circle");
+    expect(screen.queryByText("B").parentElement.tagName).toBe("circle");
+    expect(screen.queryByText("C").parentElement.tagName).toBe("circle");
+    expect(screen.queryByText("D")).toBe(null);
 
     rerender(<ForceGraph dataset={updatedData} />);
-    const dElement = await screen.queryByText("D");
-    expect(dElement.parentElement.tagName).toBe("circle");
+    expect(screen.queryByText("A").parentElement.tagName).toBe("circle");
+    expect(screen.queryByText("B").parentElement.tagName).toBe("circle");
+    expect(screen.queryByText("C").parentElement.tagName).toBe("circle");
+    expect(screen.queryByText("D").parentElement.tagName).toBe("circle");
   });
 });
