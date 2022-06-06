@@ -19,13 +19,13 @@ describe("ForceGraph with empty dataset", () => {
 
   it("renders", () => {
     const element = screen.getByTestId("element");
-    expect(element.tagName).toBe("DIV");
+    expect(element.tagName).toBe("FIGURE");
     expect(element.children[0].tagName).toBe("svg");
-    expect(element.children[1].tagName).toBe("DIV");
+    expect(element.children[1].tagName).toBe("FIGCAPTION");
   });
 
   it("passes children through", () => {
-    expect(screen.getByText(/CHILDREN/i).tagName).toBe("DIV");
+    expect(screen.getByText(/CHILDREN/i).tagName).toBe("FIGCAPTION");
   });
 });
 

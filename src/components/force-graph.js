@@ -118,15 +118,15 @@ const ForceGraph = ({ dataset, children, ...props }) => {
   }, [dataset]);
 
   return (
-    <div {...props}>
+    <figure {...props}>
       <svg
         ref={svgRef}
         style={{ borderStyle: "solid", borderWidth: "1px" }}
         width={w + margin.left + margin.right}
         height={h + margin.top + margin.bottom}
       />
-      <div>{children}</div>
-    </div>
+      <figcaption>{children}</figcaption>
+    </figure>
   );
 };
 
