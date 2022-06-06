@@ -50,6 +50,13 @@ describe("ForceGraph with simple dataset", () => {
     expect(element.parentElement.tagName).toBe("circle");
   });
 
+  it("is translated into shapes of the graph", () => {
+    expect(screen.queryByText("A").parentElement.tagName).toBe("circle");
+    expect(screen.queryByText("B").parentElement.tagName).toBe("circle");
+    expect(screen.queryByText("C").parentElement.tagName).toBe("circle");
+    expect(screen.queryByText("D")).toBe(null);
+  });
+
   it("updates graph with new data", () => {
     const updatedData = { ...data };
     updatedData.nodes.push({ name: "D" });
@@ -57,11 +64,6 @@ describe("ForceGraph with simple dataset", () => {
       { source: 0, target: 3 },
       { source: 2, target: 3 },
     ]);
-
-    expect(screen.queryByText("A").parentElement.tagName).toBe("circle");
-    expect(screen.queryByText("B").parentElement.tagName).toBe("circle");
-    expect(screen.queryByText("C").parentElement.tagName).toBe("circle");
-    expect(screen.queryByText("D")).toBe(null);
 
     rerender(<ForceGraph dataset={updatedData} />);
     expect(screen.queryByText("A").parentElement.tagName).toBe("circle");
