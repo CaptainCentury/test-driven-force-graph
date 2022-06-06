@@ -11,11 +11,9 @@ describe("ForceGraph with empty dataset", () => {
   beforeEach(() => {
     const emptyData = { nodes: [], edges: [] };
     render(
-      <div data-testid="element">
-        <ForceGraph data-testid="element" dataset={emptyData}>
-          CHILDREN
-        </ForceGraph>
-      </div>
+      <ForceGraph data-testid="element" dataset={emptyData}>
+        CHILDREN
+      </ForceGraph>
     );
   });
 

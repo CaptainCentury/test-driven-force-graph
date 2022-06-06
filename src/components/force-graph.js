@@ -11,7 +11,7 @@ import {
   select,
 } from "d3";
 
-const ForceGraph = ({ dataset, children }) => {
+const ForceGraph = ({ dataset, children, ...props }) => {
   const svgRef = React.useRef(null);
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
 
@@ -118,7 +118,7 @@ const ForceGraph = ({ dataset, children }) => {
   }, [dataset]);
 
   return (
-    <>
+    <div {...props}>
       <svg
         ref={svgRef}
         style={{ borderStyle: "solid", borderWidth: "1px" }}
@@ -126,7 +126,7 @@ const ForceGraph = ({ dataset, children }) => {
         height={h + margin.top + margin.bottom}
       />
       <div>{children}</div>
-    </>
+    </div>
   );
 };
 
