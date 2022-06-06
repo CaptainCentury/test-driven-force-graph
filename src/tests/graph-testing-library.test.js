@@ -16,7 +16,6 @@ describe("ForceGraph in React Testing Library", () => {
       </div>
     );
     const element = screen.getByTestId("element");
-    console.log(element);
     expect(element.tagName).toBe("DIV");
     expect(element.children[0].tagName).toBe("svg");
     expect(element.children[1].tagName).toBe("DIV");
@@ -52,16 +51,13 @@ describe("ForceGraph in React Testing Library", () => {
       ],
     };
     const { rerender } = render(<ForceGraph dataset={data} />);
-    const updatedData = {
-      nodes: [{ name: "A" }, { name: "B" }, { name: "C" }, { name: "D" }],
-      edges: [
-        { source: 0, target: 1 },
-        { source: 0, target: 2 },
-        { source: 1, target: 2 },
-        { source: 0, target: 3 },
-        { source: 2, target: 3 },
-      ],
-    };
+    const updatedData = { ...data };
+    updatedData.nodes.push({ name: "D" });
+    updatedData.edges.concat([
+      { source: 0, target: 3 },
+      { source: 2, target: 3 },
+    ]);
+
     expect(screen.queryByText("A").parentElement.tagName).toBe("circle");
     expect(screen.queryByText("B").parentElement.tagName).toBe("circle");
     expect(screen.queryByText("C").parentElement.tagName).toBe("circle");
