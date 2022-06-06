@@ -114,7 +114,7 @@ export function ForceGraph({ dataset, children }) {
       d.fx = null;
       d.fy = null;
     }
-  }, []);
+  }, [dataset]);
 
   return (
     <>
