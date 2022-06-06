@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { forceSimulation } from "d3-force";
 import {
   drag,
@@ -10,7 +11,7 @@ import {
   select,
 } from "d3";
 
-export function ForceGraph({ dataset, children }) {
+const ForceGraph = ({ dataset, children }) => {
   const svgRef = React.useRef(null);
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
 
@@ -128,3 +129,10 @@ export function ForceGraph({ dataset, children }) {
     </>
   );
 }
+
+ForceGraph.propTypes = {
+  children: PropTypes.node.isRequired,
+  dataset: PropTypes.any
+}
+
+export default ForceGraph

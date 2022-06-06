@@ -3,7 +3,7 @@
  */
 import React from "react";
 
-import { ForceGraph } from "../components/force-graph";
+import ForceGraph from "../components/force-graph";
 
 import { render, screen } from "@testing-library/react";
 

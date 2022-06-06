@@ -1,4 +1,4 @@
-import { ForceGraph } from "./components/force-graph";
+import ForceGraph from "./components/force-graph";
 import { createRoot } from "react-dom/client";
 import React from "react";
 
