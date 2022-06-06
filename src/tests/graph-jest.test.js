@@ -1,6 +1,5 @@
 import React from "react";
-
-import { ForceGraph } from "../components/force-graph";
+import ForceGraph from "../components/force-graph";
 
 describe("JSX", () => {
   it("calls React.createElement", () => {
@@ -12,8 +11,13 @@ describe("JSX", () => {
 
 describe("ForceGraph", () => {
   it("creates ForceGraph component", () => {
+    const emptyDataset = { nodes: [], edges: [] };
     const createElementSpy = jest.spyOn(React, "createElement");
-    <ForceGraph>example</ForceGraph>;
-    expect(createElementSpy).toHaveBeenCalledWith(ForceGraph, null, "example");
+    <ForceGraph dataset={emptyDataset}>example</ForceGraph>;
+    expect(createElementSpy).toHaveBeenCalledWith(
+      ForceGraph,
+      { dataset: emptyDataset },
+      "example"
+    );
   });
 });

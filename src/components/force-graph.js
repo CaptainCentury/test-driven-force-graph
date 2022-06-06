@@ -128,11 +128,11 @@ const ForceGraph = ({ dataset, children }) => {
       <div>{children}</div>
     </>
   );
-}
+};
 
 ForceGraph.propTypes = {
-  children: PropTypes.node.isRequired,
-  dataset: PropTypes.any
-}
+  children: PropTypes.node,
+  dataset: PropTypes.any.isRequired,
+};
 
-export default ForceGraph
+export default ForceGraph;
