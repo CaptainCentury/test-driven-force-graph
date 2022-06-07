@@ -33,4 +33,8 @@ const data = {
     { source: 8, target: 9 },
   ],
 };
-root.render(<ForceGraph dataset={data}>CAPTION</ForceGraph>);
+root.render(
+  <ForceGraph style={{ color: "blue" }} dataset={data} labelMode="labels">
+    CAPTION
+  </ForceGraph>
+);

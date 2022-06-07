@@ -11,7 +11,7 @@ import {
   select,
 } from "d3";
 
-const ForceGraph = ({ dataset, children, ...props }) => {
+const ForceGraph = ({ dataset, labelMode, children, ...props }) => {
   const svgRef = React.useRef(null);
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
 
@@ -64,10 +64,32 @@ const ForceGraph = ({ dataset, children, ...props }) => {
           .on("end", dragEnded)
       );
 
+    var nodeLabels =
+      labelMode == "labels" &&
+      svg
+        .selectAll(".nodelabel")
+        .data(dataset.nodes)
+        .enter()
+        .append("text")
+        .attr("x", function (d) {
+          return d.x;
+        })
+        .attr("y", function (d) {
+          return d.y;
+        })
+        .attr("class", "nodelabel")
+        .attr("stroke", "#000")
+        .text(function (d) {
+          return d.name;
+        });
+
     // simple tooltip
-    nodes.append("title").text(function (d) {
-      return d.name;
-    });
+
+    if (labelMode == "tooltip") {
+      nodes.append("title").text(function (d) {
+        return d.name;
+      });
+    }
 
     // simulation tick definition
     force.on("tick", function () {
@@ -92,6 +114,16 @@ const ForceGraph = ({ dataset, children, ...props }) => {
         .attr("cy", function (d) {
           return d.y;
         });
+
+      if (nodeLabels) {
+        nodeLabels
+          .attr("x", function (d) {
+            return d.x;
+          })
+          .attr("y", function (d) {
+            return d.y;
+          });
+      }
     });
 
     // define drag events

@@ -40,7 +40,7 @@ describe("ForceGraph with simple dataset", () => {
     ],
   };
   beforeEach(() => {
-    ({ rerender } = render(<ForceGraph dataset={data} />));
+    ({ rerender } = render(<ForceGraph dataset={data} labelMode="tooltip" />));
   });
 
   it("renders data", async () => {
@@ -63,7 +63,7 @@ describe("ForceGraph with simple dataset", () => {
       { source: 2, target: 3 },
     ]);
 
-    rerender(<ForceGraph dataset={updatedData} />);
+    rerender(<ForceGraph dataset={updatedData} labelMode="tooltip" />);
     expect(screen.queryByText("A").parentElement.tagName).toBe("circle");
     expect(screen.queryByText("B").parentElement.tagName).toBe("circle");
     expect(screen.queryByText("C").parentElement.tagName).toBe("circle");
