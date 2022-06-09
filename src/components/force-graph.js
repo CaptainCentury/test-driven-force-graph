@@ -71,6 +71,7 @@ const ForceGraph = ({ dataset, labelMode, children, ...props }) => {
         .data(dataset.nodes)
         .enter()
         .append("text")
+        .attr("text-anchor", "middle")
         .attr("x", function (d) {
           return d.x;
         })
