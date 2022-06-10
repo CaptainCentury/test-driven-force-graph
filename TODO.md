@@ -2,8 +2,8 @@
 
 ## Development
 
-* webpack should build on save
 * add TypeScript
+* add css files
 
 ## Style nodes according to data properties
 
