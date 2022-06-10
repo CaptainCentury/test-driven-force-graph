@@ -1,7 +1,6 @@
 var path = require("path");
 
 module.exports = {
-  mode: "development",
   entry: {
     "force-graph": "./src/components/force-graph.js",
     example: "./src/index.js",

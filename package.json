@@ -10,7 +10,8 @@
     "test": "jest --coverage --coverageReporters=text",
     "test-watch": "jest --watchAll",
     "lint": "eslint . && prettier-eslint --list-different ./src/**/*.js",
-    "format": "prettier-eslint --write ./src/**/*.js"
+    "format": "prettier-eslint --write ./src/**/*.js",
+    "dev": "webpack-dev-server --config webpack.config.js --open --mode development"
   },
   "author": "",
   "license": "ISC",
@@ -30,7 +31,8 @@
     "prettier": "2.6.2",
     "prettier-eslint-cli": "6.0.1",
     "webpack": "5.72.1",
-    "webpack-cli": "4.9.2"
+    "webpack-cli": "4.9.2",
+    "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
     "d3": "7.4.4",
