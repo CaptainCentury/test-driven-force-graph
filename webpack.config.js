@@ -1,10 +1,14 @@
 var path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  mode: "development",
+  entry: {
+    "force-graph": "./src/components/force-graph.js",
+    example: "./src/index.js",
+  },
   output: {
     path: path.join(__dirname, "dist", "assets"),
-    filename: "bundle.js",
+    chunkFilename: "[id].js",
   },
   module: {
     rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }],
