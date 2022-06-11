@@ -2,12 +2,10 @@
  * @jest-environment jsdom
  */
 import React from "react";
-
-import ForceGraph from "../components/force-graph";
-
 import { render, screen } from "@testing-library/react";
 
-import abcData from "./data/abc";
+import ForceGraph from "../components/force-graph";
+import abcData from "../data/abc";
 
 describe("ForceGraph with empty dataset", () => {
   beforeEach(() => {
