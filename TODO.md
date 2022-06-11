@@ -39,3 +39,4 @@
 - labels should be centered on button
 - labels should not spill outside circle representing nodes
 - all nodes of a certain type should be equally sized (or at least size should reflect some properties of the node rather than label size)
+- labels and tooltips should work together

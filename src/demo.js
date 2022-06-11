@@ -10,6 +10,7 @@ const BasicButton = styled.button`
   border-radius: 3px;
   border: none;
   color: white;
+  margin: 2px;
 `;
 
 const DataButton = styled(BasicButton)`
@@ -22,20 +23,22 @@ export const Demo = () => {
   return (
     <>
       <ForceGraph style={{ color: "blue" }} dataset={data} labelMode="labels">
-        <DataButton
-          onClick={() => {
-            setData(namesData);
-          }}
-        >
-          Names
-        </DataButton>
-        <DataButton
-          onClick={() => {
-            setData(abcData);
-          }}
-        >
-          ABC
-        </DataButton>
+        <div>
+          <DataButton
+            onClick={() => {
+              setData(namesData);
+            }}
+          >
+            Names
+          </DataButton>
+          <DataButton
+            onClick={() => {
+              setData(abcData);
+            }}
+          >
+            ABC
+          </DataButton>
+        </div>
       </ForceGraph>
     </>
   );
