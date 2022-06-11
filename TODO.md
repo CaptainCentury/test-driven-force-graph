@@ -8,6 +8,7 @@
 ## Introduce more data
 
 - add Tenwise data example with pmids and twdis
+- separate out data from components
 
 ## Style nodes according to data properties
 

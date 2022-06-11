@@ -33,6 +33,15 @@ const namesData = {
   ],
 };
 
+const AbcData = {
+  nodes: [{ name: "A" }, { name: "B" }, { name: "C" }],
+  edges: [
+    { source: 0, target: 1 },
+    { source: 0, target: 2 },
+    { source: 1, target: 2 },
+  ],
+};
+
 const BasicButton = styled.button`
   background: blue;
   border-radius: 3px;
@@ -45,15 +54,25 @@ const DataButton = styled(BasicButton)`
 `;
 
 export const Demo = () => {
+  const [data, setData] = React.useState(namesData);
+
   return (
     <>
-      <ForceGraph
-        style={{ color: "blue" }}
-        dataset={namesData}
-        labelMode="labels"
-      >
-        <DataButton>Names</DataButton>
-        <DataButton>ABC</DataButton>
+      <ForceGraph style={{ color: "blue" }} dataset={data} labelMode="labels">
+        <DataButton
+          onClick={() => {
+            setData(namesData);
+          }}
+        >
+          Names
+        </DataButton>
+        <DataButton
+          onClick={() => {
+            setData(AbcData);
+          }}
+        >
+          ABC
+        </DataButton>
       </ForceGraph>
     </>
   );
