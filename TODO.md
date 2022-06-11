@@ -2,16 +2,21 @@
 
 ## Development
 
-* add TypeScript
-* add css files
+- add TypeScript
+- add css files
+
+## Introduce more data
+
+- add Tenwise data example with pmids and twdis
 
 ## Style nodes according to data properties
 
-* different types of nodes should have separate styling
+- different types of nodes should have separate styling
 
 ## Make label unselectable
 
 [Stack overflow](https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting)
+
 ```
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -35,6 +40,6 @@
 
 ## Make button labels
 
-* labels should be centered on button
-* labels should not spill outside circle representing nodes
-* all nodes of a certain type should be equally sized (or at least size should reflect some properties of the node rather than label size)
+- labels should be centered on button
+- labels should not spill outside circle representing nodes
+- all nodes of a certain type should be equally sized (or at least size should reflect some properties of the node rather than label size)
