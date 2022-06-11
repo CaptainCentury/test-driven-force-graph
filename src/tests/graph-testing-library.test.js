@@ -7,6 +7,8 @@ import ForceGraph from "../components/force-graph";
 
 import { render, screen } from "@testing-library/react";
 
+import abcData from "./data/abc";
+
 describe("ForceGraph with empty dataset", () => {
   beforeEach(() => {
     const emptyData = { nodes: [], edges: [] };
@@ -31,16 +33,10 @@ describe("ForceGraph with empty dataset", () => {
 
 describe("ForceGraph with simple dataset", () => {
   let rerender;
-  const data = {
-    nodes: [{ name: "A" }, { name: "B" }, { name: "C" }],
-    edges: [
-      { source: 0, target: 1 },
-      { source: 0, target: 2 },
-      { source: 1, target: 2 },
-    ],
-  };
   beforeEach(() => {
-    ({ rerender } = render(<ForceGraph dataset={data} labelMode="tooltip" />));
+    ({ rerender } = render(
+      <ForceGraph dataset={abcData} labelMode="tooltip" />
+    ));
   });
 
   it("renders data", async () => {
@@ -56,7 +52,7 @@ describe("ForceGraph with simple dataset", () => {
   });
 
   it("updates graph with new data", () => {
-    const updatedData = { ...data };
+    const updatedData = { ...abcData };
     updatedData.nodes.push({ name: "D" });
     updatedData.edges.concat([
       { source: 0, target: 3 },

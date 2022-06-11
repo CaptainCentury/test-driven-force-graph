@@ -8,7 +8,6 @@
 ## Introduce more data
 
 - add Tenwise data example with pmids and twdis
-- separate out data from components
 
 ## Style nodes according to data properties
 
@@ -18,25 +17,21 @@
 
 [Stack overflow](https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting)
 
-```
+```css
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 ```
 
-```
-<p>
-  Selectable text.
-</p>
-<p class="noselect">
-  Unselectable text.
-</p>
+```html
+<p>Selectable text.</p>
+<p class="noselect">Unselectable text.</p>
 ```
 
 ## Make button labels
