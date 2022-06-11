@@ -9,7 +9,9 @@
     "build-dev": "npx webpack --mode development",
     "test": "jest --coverage --coverageReporters=text",
     "test-watch": "jest --watchAll",
-    "lint": "eslint . && prettier-eslint --list-different ./src/**/*.js",
+    "lint:js": "eslint . && prettier-eslint --list-different ./src/**/*.js",
+    "lint:css": "stylelint **/*.js",
+    "lint": "npm run lint:js && npm run lint:css",
     "format": "prettier-eslint --write ./src/**/*.js",
     "dev": "webpack-dev-server --config webpack.config.js --open --mode development"
   },
@@ -31,6 +33,10 @@
     "jest-environment-jsdom": "28.1.0",
     "prettier": "2.6.2",
     "prettier-eslint-cli": "6.0.1",
+    "stylelint": "14.9.1",
+    "stylelint-config-recommended": "8.0.0",
+    "stylelint-config-styled-components": "0.1.1",
+    "stylelint-processor-styled-components": "1.10.0",
     "webpack": "5.72.1",
     "webpack-cli": "4.9.2",
     "webpack-dev-server": "^4.9.2"
