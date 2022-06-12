@@ -6,7 +6,7 @@ module.exports = {
   },
   transformIgnorePatterns: ["node_modules/(?!@ngrx|(?!deck.gl)|ng-dynamic)"],
   setupFiles: ["./src/tests/setup-tests.js"],
-  setupTestFrameworkScriptFile: "./src/tests/setup-framework.js",
+  setupFilesAfterEnv: ["./src/tests/setup-framework.js"],
   // transform: {
   //   "^.+\\.jsx$": "babel-jest",
   //   "^.+\\.js$": "babel-jest",

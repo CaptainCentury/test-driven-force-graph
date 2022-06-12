@@ -166,7 +166,7 @@ const ForceGraph = ({ dataset, labelMode, children, ...props }) => {
 ForceGraph.propTypes = {
   children: PropTypes.node,
   dataset: PropTypes.any.isRequired,
-  labelMode: PropTypes.text,
+  labelMode: PropTypes.string,
 };
 
 export default ForceGraph;
