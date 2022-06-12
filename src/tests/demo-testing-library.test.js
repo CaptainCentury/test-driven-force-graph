@@ -46,4 +46,10 @@ describe("Demo component", () => {
     expect(queryByText("C")).toBe(null);
     expect(queryByText("Donovan").parentElement.tagName).toBe("g");
   });
+
+  it("styles ABC dataset button", () => {
+    const { getByText } = render(<Demo />);
+    const abcButton = getByText(/abc/i);
+    expect(abcButton).toHaveStyleRule("background", "green");
+  });
 });
