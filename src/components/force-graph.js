@@ -11,7 +11,13 @@ import {
   select,
 } from "d3";
 
-const ForceGraph = ({ dataset, labelMode, children, ...props }) => {
+class Visualizer {
+  constructor(radius) {
+    this.radius = radius;
+  }
+}
+
+const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
   const svgRef = React.useRef(null);
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
 
@@ -53,7 +59,7 @@ const ForceGraph = ({ dataset, labelMode, children, ...props }) => {
       .data(dataset.nodes)
       .enter()
       .append("circle")
-      .attr("r", 10)
+      .attr("r", visualizer.radius)
       .style("fill", function (d, i) {
         return colors(i);
       })
@@ -168,6 +174,11 @@ ForceGraph.propTypes = {
   children: PropTypes.node,
   dataset: PropTypes.any.isRequired,
   labelMode: PropTypes.string,
+  visualizer: PropTypes.instanceOf(Visualizer),
+};
+
+ForceGraph.defaultProps = {
+  visualizer: new Visualizer(20),
 };
 
 export default ForceGraph;

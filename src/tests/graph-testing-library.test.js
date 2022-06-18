@@ -64,3 +64,25 @@ describe("ForceGraph with simple dataset", () => {
     expect(screen.queryByText("D").parentElement.tagName).toBe("circle");
   });
 });
+
+describe("Visualizer", () => {
+  it("has default settings", () => {
+    const { getByText } = render(
+      <ForceGraph dataset={abcData} labelMode="tooltip" />
+    );
+    expect(getByText("A").parentElement).toHaveAttribute("r", "20");
+  });
+
+  it("sets radius of node element visualization", () => {
+    const visualizer = ForceGraph.defaultProps.visualizer;
+    visualizer.radius = 30;
+    const { getByText } = render(
+      <ForceGraph
+        dataset={abcData}
+        visualize={visualizer}
+        labelMode="tooltip"
+      />
+    );
+    expect(getByText("A").parentElement).toHaveAttribute("r", "30");
+  });
+});
