@@ -15,6 +15,10 @@ class Visualizer {
   constructor(radius) {
     this.radius = radius;
   }
+
+  updateRadius(r) {
+    return new Visualizer(r);
+  }
 }
 
 const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
@@ -155,7 +159,7 @@ const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
       d.fx = null;
       d.fy = null;
     }
-  }, [dataset]);
+  }, [dataset, visualizer]);
 
   return (
     <figure {...props}>

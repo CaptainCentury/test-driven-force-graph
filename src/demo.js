@@ -18,11 +18,23 @@ const DataButton = styled(BasicButton)`
 `;
 
 export const Demo = () => {
+  const [radius, setRadius] = React.useState(10);
   const [data, setData] = React.useState(namesData);
+  const [visualizer, setVisualizer] = React.useState(
+    ForceGraph.defaultProps.visualizer
+  );
+  React.useEffect(() => {
+    setVisualizer(visualizer.updateRadius(radius));
+  }, [radius]);
 
   return (
     <>
-      <ForceGraph style={{ color: "blue" }} dataset={data} labelMode="labels">
+      <ForceGraph
+        style={{ color: "blue" }}
+        visualizer={visualizer}
+        dataset={data}
+        labelMode="labels"
+      >
         <div>
           <DataButton
             onClick={() => {
@@ -40,6 +52,19 @@ export const Demo = () => {
           </DataButton>
         </div>
       </ForceGraph>
+      <p>
+        Node radius:
+        <input
+          type="number"
+          step="1"
+          value={radius}
+          id="radius"
+          min="5"
+          onChange={(event) => {
+            setRadius(event.target.value);
+          }}
+        />
+      </p>
     </>
   );
 };
