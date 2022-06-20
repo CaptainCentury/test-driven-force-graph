@@ -12,12 +12,17 @@ import {
 } from "d3";
 
 class Visualizer {
-  constructor(radius) {
+  constructor(radius, linkStrength) {
     this.radius = radius;
+    this.linkStrength = linkStrength;
   }
 
-  updateRadius(r) {
-    return new Visualizer(r);
+  instance() {
+    return new Visualizer(this.radius, this.linkStrength);
+  }
+
+  toString() {
+    return `(r: ${this.radius}, link: ${this.linkStrength})`;
   }
 }
 
@@ -29,11 +34,13 @@ const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
   var w = 300;
   var h = 300;
 
+  console.log(`Visualizer: ${visualizer.toString()}`);
+
   React.useEffect(() => {
     // init simple force layout
     var force = forceSimulation(dataset.nodes)
       .force("charge", forceManyBody())
-      .force("link", forceLink(dataset.edges))
+      .force("link", forceLink(dataset.edges).strength(visualizer.linkStrength))
       .force(
         "center",
         forceCenter()
