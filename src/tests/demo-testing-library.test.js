@@ -51,5 +51,6 @@ describe("Demo component", () => {
     const { getByText } = render(<Demo />);
     const abcButton = getByText(/abc/i);
     expect(abcButton).toHaveStyleRule("background", "green");
+    expect(abcButton).toHaveStyleRule("border-radius", "3px");
   });
 });
