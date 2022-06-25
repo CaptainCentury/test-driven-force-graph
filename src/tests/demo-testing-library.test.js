@@ -5,7 +5,14 @@ import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { Demo } from "../demo";
+import { DataButton, Demo } from "../demo";
+
+describe("Data button", () => {
+  it("to render correctly", () => {
+    const { getByText } = render(<DataButton>Test</DataButton>);
+    expect(getByText("Test")).toMatchSnapshot();
+  });
+});
 
 describe("Demo component", () => {
   it("renders Abc dataset button", () => {

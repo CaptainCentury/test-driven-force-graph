@@ -13,7 +13,7 @@ const BasicButton = styled.button`
   margin: 2px;
 `;
 
-const DataButton = styled(BasicButton)`
+export const DataButton = styled(BasicButton)`
   background: green;
 `;
 

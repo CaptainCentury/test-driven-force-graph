@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Data button to render correctly 1`] = `
+.c0 {
+  background: blue;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  margin: 2px;
+}
+
+.c1 {
+  background: green;
+}
+
+<button
+  class="c0 c1"
+>
+  Test
+</button>
+`;
