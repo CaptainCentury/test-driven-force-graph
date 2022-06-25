@@ -1,5 +1,9 @@
 # TODO
 
+## Design
+
+- minimize core component dependencies (ideally just React and D3)
+
 ## Development
 
 - add TypeScript
