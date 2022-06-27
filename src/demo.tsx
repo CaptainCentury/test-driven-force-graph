@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import ForceGraph from "./components/force-graph";
@@ -18,14 +18,14 @@ export const DataButton = styled(BasicButton)`
 `;
 
 export const Demo = () => {
-  const [radius, setRadius] = React.useState(10);
-  const [linkStrength, setLinkStrength] = React.useState(0.01);
-  const [data, setData] = React.useState(namesData);
-  const [visualizer, setVisualizer] = React.useState(
+  const [radius, setRadius] = useState(10);
+  const [linkStrength, setLinkStrength] = useState(0.01);
+  const [data, setData] = useState(namesData);
+  const [visualizer, setVisualizer] = useState(
     ForceGraph.defaultProps.visualizer
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const update = visualizer.instance();
     update.radius = radius;
     update.linkStrength = linkStrength;
@@ -66,7 +66,7 @@ export const Demo = () => {
           id="radius"
           min="5"
           onChange={(event) => {
-            setRadius(event.target.value);
+            setRadius(Number(event.target.value));
           }}
         />
       </p>
@@ -79,7 +79,7 @@ export const Demo = () => {
           id="link-strength"
           min="0.001"
           onChange={(event) => {
-            setLinkStrength(event.target.value);
+            setLinkStrength(Number(event.target.value));
           }}
         />
       </p>
