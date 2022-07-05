@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import PropTypes from "prop-types";
+import React, { FunctionComponent, useEffect, useRef } from "react";
 import { forceSimulation } from "d3-force";
 import {
   drag,
@@ -11,7 +10,7 @@ import {
   select,
 } from "d3";
 
-class Visualizer {
+export class Visualizer {
   radius: number;
   linkStrength: number;
 
@@ -29,13 +28,34 @@ class Visualizer {
   }
 }
 
-class Edge {
-  name: string;
-  source: number;
-  target: number;
-}
+type Node = {
+  x: number;
+  y: number;
+};
 
-const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
+type Edge = {
+  name: string;
+  source: Node;
+  target: Node;
+  x: number;
+  y: number;
+};
+
+type ForceGraphProps = {
+  dataset: any;
+  labelMode?: string;
+  visualizer?: Visualizer;
+  style?: React.CSSProperties;
+  children?: JSX.Element | string;
+};
+
+const ForceGraph: FunctionComponent<ForceGraphProps> = ({
+  dataset,
+  labelMode = "labels",
+  visualizer = new Visualizer(20, 0.01),
+  children,
+  ...props
+}) => {
   const svgRef = useRef(null);
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
 
@@ -79,7 +99,7 @@ const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
       .append("circle")
       .attr("r", visualizer.radius)
       .style("fill", function (d, i) {
-        return colors(i);
+        return colors(i.toString());
       })
       .call(
         drag()
@@ -92,7 +112,7 @@ const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
       labelMode == "labels" &&
       svg
         .selectAll(".nodelabel")
-        .data(dataset.nodes)
+        .data<Edge>(dataset.nodes)
         .enter()
         .append("text")
         .attr("text-anchor", "middle")
@@ -112,7 +132,7 @@ const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
     // simple tooltip
 
     if (labelMode == "tooltip") {
-      nodes.append("title").text(function (d) {
+      nodes.append("title").text(function (d: { name: string }) {
         return d.name;
       });
     }
@@ -120,24 +140,24 @@ const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
     // simulation tick definition
     force.on("tick", function () {
       edges
-        .attr("x1", function (d) {
+        .attr("x1", function (d: Edge) {
           return d.source.x;
         })
-        .attr("y1", function (d) {
+        .attr("y1", function (d: Edge) {
           return d.source.y;
         })
-        .attr("x2", function (d) {
+        .attr("x2", function (d: Edge) {
           return d.target.x;
         })
-        .attr("y2", function (d) {
+        .attr("y2", function (d: Edge) {
           return d.target.y;
         });
 
       nodes
-        .attr("cx", function (d) {
+        .attr("cx", function (d: Node) {
           return d.x;
         })
-        .attr("cy", function (d) {
+        .attr("cy", function (d: Node) {
           return d.y;
         });
 
@@ -186,17 +206,6 @@ const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
       <figcaption>{children}</figcaption>
     </figure>
   );
-};
-
-ForceGraph.propTypes = {
-  children: PropTypes.node,
-  dataset: PropTypes.any.isRequired,
-  labelMode: PropTypes.string,
-  visualizer: PropTypes.instanceOf(Visualizer),
-};
-
-ForceGraph.defaultProps = {
-  visualizer: new Visualizer(20),
 };
 
 export default ForceGraph;

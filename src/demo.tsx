@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import ForceGraph from "./components/force-graph";
+import ForceGraph, { Visualizer } from "./components/force-graph";
 import namesData from "./data/names";
 import abcData from "./data/abc";
 
@@ -21,9 +21,7 @@ export const Demo = () => {
   const [radius, setRadius] = useState(10);
   const [linkStrength, setLinkStrength] = useState(0.01);
   const [data, setData] = useState(namesData);
-  const [visualizer, setVisualizer] = useState(
-    ForceGraph.defaultProps.visualizer
-  );
+  const [visualizer, setVisualizer] = useState(new Visualizer(20, 1));
 
   useEffect(() => {
     const update = visualizer.instance();

@@ -4,7 +4,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 
-import ForceGraph from "../components/force-graph";
+import ForceGraph, { Visualizer } from "../components/force-graph";
 import abcData from "../data/abc";
 
 describe("ForceGraph with empty dataset", () => {
@@ -74,12 +74,12 @@ describe("Visualizer", () => {
   });
 
   it("sets radius of node element visualization", () => {
-    const visualizer = ForceGraph.defaultProps.visualizer;
+    const visualizer = new Visualizer(20, 1);
     visualizer.radius = 30;
     const { getByText } = render(
       <ForceGraph
         dataset={abcData}
-        visualize={visualizer}
+        visualizer={visualizer}
         labelMode="tooltip"
       />
     );
