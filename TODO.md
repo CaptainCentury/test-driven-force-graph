@@ -8,6 +8,7 @@
 
 - add TypeScript
 - add css files
+- error boundary in demo app
 
 ## Introduce more data
 
@@ -44,3 +45,7 @@
 - labels should not spill outside circle representing nodes
 - all nodes of a certain type should be equally sized (or at least size should reflect some properties of the node rather than label size)
 - labels and tooltips should work together
+
+## Spread nodes so they do not initially stack
+
+- d3 for the impatiant seems to suggest setting `cx`, `cy`
