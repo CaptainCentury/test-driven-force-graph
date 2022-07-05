@@ -5,9 +5,10 @@
     "sourceMap": true,
     "allowJs": true,
     "module": "es6",
-    "target": "es5",
-    "jsx": "react-jsx",
-    "moduleResolution": "node"
+    "target": "es6",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
   "include": ["./src/**/*"]
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { forceSimulation } from "d3-force";
 import {
@@ -12,6 +12,9 @@ import {
 } from "d3";
 
 class Visualizer {
+  radius: number;
+  linkStrength: number;
+
   constructor(radius, linkStrength) {
     this.radius = radius;
     this.linkStrength = linkStrength;
@@ -26,17 +29,21 @@ class Visualizer {
   }
 }
 
+class Edge {
+  name: string;
+  source: number;
+  target: number;
+}
+
 const ForceGraph = ({ dataset, labelMode, visualizer, children, ...props }) => {
-  const svgRef = React.useRef(null);
+  const svgRef = useRef(null);
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
 
   // define display
   var w = 300;
   var h = 300;
 
-  console.log(`Visualizer: ${visualizer.toString()}`);
-
-  React.useEffect(() => {
+  useEffect(() => {
     // init simple force layout
     var force = forceSimulation(dataset.nodes)
       .force("charge", forceManyBody())

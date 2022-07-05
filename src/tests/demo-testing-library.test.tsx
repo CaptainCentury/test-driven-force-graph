@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { DataButton, Demo } from "../demo";
+import React from "react";
 
 describe("Data button", () => {
   it("to render correctly", () => {
