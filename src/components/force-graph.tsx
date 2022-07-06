@@ -98,6 +98,9 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
       .enter()
       .append("circle")
       .attr("r", visualizer.radius)
+      .attr("cx", function (d, i) {
+        return i * visualizer.radius;
+      })
       .style("fill", function (d, i) {
         return colors(i.toString());
       })
