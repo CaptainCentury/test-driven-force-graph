@@ -99,6 +99,7 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
       .append("circle")
       .attr("r", visualizer.radius)
       .attr("cx", function (d, i) {
+        // spread initial positions to avoid stacking nodes
         return i * visualizer.radius;
       })
       .style("fill", function (d, i) {
