@@ -6,13 +6,17 @@
 
 ## Development
 
-- add TypeScript
+- tell linters about TypeScript
+- TS infer types from usage?
 - add css files
 - error boundary in demo app
+- wallaby in or out?
+- can snapshot work for graph?
 
 ## Introduce more data
 
 - add Tenwise data example with pmids and twdis
+- example of yarn ball / large example
 
 ## Style nodes according to data properties
 
@@ -46,6 +50,4 @@
 - all nodes of a certain type should be equally sized (or at least size should reflect some properties of the node rather than label size)
 - labels and tooltips should work together
 
-## Spread nodes so they do not initially stack
-
-- d3 for the impatiant seems to suggest setting `cx`, `cy`
+## Make graph zoomable (scrollable)
