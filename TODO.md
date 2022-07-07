@@ -3,6 +3,7 @@
 ## Design
 
 - minimize core component dependencies (ideally just React and D3)
+- possibly split plot into plot/plotter, graph/graphographer etc
 
 ## Development
 
