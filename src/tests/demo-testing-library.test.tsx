@@ -4,7 +4,7 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { DataButton, Demo } from "../graph-demo";
+import { DataButton, GraphDemo } from "../graph-demo";
 import React from "react";
 
 describe("Data button", () => {
@@ -16,32 +16,32 @@ describe("Data button", () => {
 
 describe("Demo component", () => {
   it("renders Abc dataset button", () => {
-    const { getByText } = render(<Demo />);
+    const { getByText } = render(<GraphDemo />);
     const element = getByText("ABC");
     expect(element.tagName).toBe("BUTTON");
   });
 
   it("renders Names dataset button", () => {
-    const { getByText } = render(<Demo />);
+    const { getByText } = render(<GraphDemo />);
     const element = getByText(/names/i);
     expect(element.tagName).toBe("BUTTON");
   });
 
   it("renders correct number of buttons", () => {
-    const { getAllByRole } = render(<Demo />);
+    const { getAllByRole } = render(<GraphDemo />);
     const elements = getAllByRole("button");
     expect(elements.length).toBe(2);
   });
 
   it("renders element Donovan in the graph", () => {
-    const { getByText } = render(<Demo />);
+    const { getByText } = render(<GraphDemo />);
     const element = getByText("Donovan");
     expect(element.parentElement.tagName).toBe("g");
   });
 
   it("switches data when data button is clicked", async () => {
     const user = userEvent.setup();
-    const { getByText, queryByText } = render(<Demo />);
+    const { getByText, queryByText } = render(<GraphDemo />);
     const abcButton = getByText(/abc/i);
     const namesButton = getByText(/names/i);
 
@@ -55,7 +55,7 @@ describe("Demo component", () => {
   });
 
   it("styles ABC dataset button", () => {
-    const { getByText } = render(<Demo />);
+    const { getByText } = render(<GraphDemo />);
     const abcButton = getByText(/abc/i);
     expect(abcButton).toHaveStyleRule("background", "green");
     expect(abcButton).toHaveStyleRule("border-radius", "3px");

@@ -17,7 +17,7 @@ export const DataButton = styled(BasicButton)`
   background: green;
 `;
 
-export const Demo = () => {
+export const GraphDemo = () => {
   const [radius, setRadius] = useState(10);
   const [linkStrength, setLinkStrength] = useState(0.01);
   const [data, setData] = useState(namesData);
@@ -32,6 +32,7 @@ export const Demo = () => {
 
   return (
     <>
+      <h1>ForceGraph example</h1>
       <ForceGraph
         style={{ color: "blue" }}
         visualizer={visualizer}

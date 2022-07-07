@@ -3,6 +3,7 @@ var path = require("path");
 module.exports = {
   entry: {
     "force-graph": "./src/components/force-graph.tsx",
+    "line-plot": "./src/components/line-plot.tsx",
     example: "./src/index.tsx",
   },
   output: {
