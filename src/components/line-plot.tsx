@@ -45,12 +45,11 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
         [margin.left, w + margin.left]
       );
 
-      const drawData = (g, xAccessor, accessor, color, curve) => {
+      const drawData = (g, xAccessor, accessor, curve) => {
         g.selectAll("circle")
           .data(dataTable)
           .enter()
           .append("circle")
-          .attr("fill", color)
           .attr("r", 5)
           .attr("cx", xAccessor)
           .attr("cy", accessor);
@@ -59,7 +58,6 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
 
         g.append("path")
           .attr("fill", "none")
-          .attr("stroke", color)
           .attr("d", lineMaker(dataTable as Iterable<[number, number]>));
       };
 
@@ -74,9 +72,11 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
           g,
           (d) => scaleX(d[labels[0]]),
           (d) => scaleY(d[labels[i]]),
-          colors[i - 1],
           curveStep
         );
+
+        g.selectAll("circle").attr("fill", colors[i - 1]);
+        g.selectAll("path").attr("stroke", colors[i - 1]);
       }
 
       const xAxisMaker = axisBottom(scaleX);
