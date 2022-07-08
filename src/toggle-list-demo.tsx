@@ -5,7 +5,7 @@ export const ToggleListDemo = () => {
   return (
     <>
       <h1>Toggle list example</h1>
-      <ToggleList />
+      <ToggleList items={["a", "b", "c"]} />
     </>
   );
 };
