@@ -24,12 +24,12 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
 
       var scaleX = scaleLinear()
         .domain(extent(dataTable, (d) => Number(d["x"])))
-        .range([0, w]);
+        .range([margin.left, w + margin.left]);
 
       for (let i = 1; i < labels.length; i++) {
         var scaleY = scaleLinear()
           .domain(extent(dataTable, (d) => Number(d[labels[i]])))
-          .range([h, 0]);
+          .range([h + margin.bottom, margin.bottom]);
 
         select("#line-plot")
           .append("g")
