@@ -16,6 +16,10 @@
 - handle reading of files in public in test context
 - split out reading tsv files so that plotter can be tested directly
 
+## Typing
+
+- d3.extent string and number
+
 ## Introduce more data
 
 - add Tenwise data example with pmids and twdis

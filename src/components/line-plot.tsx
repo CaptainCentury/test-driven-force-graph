@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useEffect, useRef } from "react";
-import d3, { extent, line, scaleLinear, select } from "d3";
+import { DSVRowArray, extent, scaleLinear, select } from "d3";
+import { line, curveStep } from "d3-shape";
 
 type LinePlotProps = {
-  dataTable: d3.DSVRowArray<string>;
+  dataTable: DSVRowArray<string>;
 };
 
 export const LinePlot: FunctionComponent<LinePlotProps> = ({
@@ -21,37 +22,54 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
   useEffect(() => {
     if (dataTable && dataTable.length > 0) {
       const labels = Object.keys(dataTable[0]);
+      const svg = select("#line-plot");
+      const width = Number(svg.attr("width"));
+      const height = Number(svg.attr("height"));
 
-      var scaleX = scaleLinear()
-        .domain(extent(dataTable, (d) => Number(d[labels[0]])))
-        .range([margin.left, w + margin.left]);
+      const makeScale = function (accessor, range) {
+        return scaleLinear()
+          .domain(extent(dataTable, accessor).map((d) => Number(d)))
+          .range(range)
+          .nice();
+      };
 
-      for (let i = 1; i < labels.length; i++) {
-        var scaleY = scaleLinear()
-          .domain(extent(dataTable, (d) => Number(d[labels[i]])))
-          .range([h + margin.bottom, margin.bottom]);
+      const scaleX = makeScale(
+        (d) => d[labels[0]],
+        [margin.left, w + margin.left]
+      );
 
-        select("#line-plot")
-          .append("g")
-          .attr("id", `line${i}`)
-          .selectAll("circle")
+      const drawData = (g, xAccessor, accessor, color, curve) => {
+        g.selectAll("circle")
           .data(dataTable)
           .enter()
           .append("circle")
+          .attr("fill", color)
           .attr("r", 5)
-          .attr("fill", colors[i - 1])
-          .attr("cx", (d) => scaleX(Number(d[labels[0]])))
-          .attr("cy", (d) => scaleY(Number(d[labels[i]])));
+          .attr("cx", xAccessor)
+          .attr("cy", accessor);
 
-        const lineMaker = line()
-          .x((d) => scaleX(d[labels[0]]))
-          .y((d) => scaleY(d[labels[i]]));
+        const lineMaker = line().curve(curve).x(xAccessor).y(accessor);
 
-        select(`#line${i}`)
-          .append("path")
+        g.append("path")
           .attr("fill", "none")
-          .attr("stroke", colors[i - 1])
+          .attr("stroke", color)
           .attr("d", lineMaker(dataTable as Iterable<[number, number]>));
+      };
+
+      for (let i = 1; i < labels.length; i++) {
+        var scaleY = makeScale(
+          (d) => d[labels[i]],
+          [h + margin.bottom, margin.bottom]
+        );
+
+        const g = svg.append("g").attr("id", `line${i}`);
+        drawData(
+          g,
+          (d) => scaleX(d[labels[0]]),
+          (d) => scaleY(d[labels[i]]),
+          colors[i - 1],
+          curveStep
+        );
       }
     }
   }, [dataTable]);
