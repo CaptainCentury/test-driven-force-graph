@@ -13,6 +13,7 @@
 - error boundary in demo app
 - wallaby in or out?
 - can snapshot work for graph?
+- handle reading of files in public in test context
 
 ## Introduce more data
 
