@@ -1,5 +1,12 @@
 import React, { FunctionComponent, useEffect, useRef } from "react";
-import { DSVRowArray, extent, scaleLinear, select } from "d3";
+import {
+  axisBottom,
+  axisLeft,
+  DSVRowArray,
+  extent,
+  scaleLinear,
+  select,
+} from "d3";
 import { line, curveStep } from "d3-shape";
 
 type LinePlotProps = {
@@ -71,6 +78,23 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
           curveStep
         );
       }
+
+      const xAxisMaker = axisBottom(scaleX);
+      const yAxisMaker = axisLeft(
+        makeScale((d) => d[labels[1]], [h + margin.bottom, margin.bottom])
+      );
+
+      svg
+        .append("g")
+        .attr(
+          "transform",
+          "translate(0, " + (height - margin.bottom).toString() + ")"
+        )
+        .call(xAxisMaker);
+      svg
+        .append("g")
+        .attr("transform", "translate(" + margin.left + ", 0)")
+        .call(yAxisMaker);
     }
   }, [dataTable]);
 
