@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useRef } from "react";
-import d3, { extent, scaleLinear, select } from "d3";
+import d3, { extent, line, scaleLinear, select } from "d3";
 
 type LinePlotProps = {
   dataTable: d3.DSVRowArray<string>;
@@ -33,15 +33,25 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
 
         select("#line-plot")
           .append("g")
-          .attr("id", "ds1")
+          .attr("id", `line${i}`)
           .selectAll("circle")
           .data(dataTable)
           .enter()
           .append("circle")
           .attr("r", 5)
           .attr("fill", colors[i - 1])
-          .attr("cx", (d) => scaleX(Number(d["x"])))
+          .attr("cx", (d) => scaleX(Number(d[labels[0]])))
           .attr("cy", (d) => scaleY(Number(d[labels[i]])));
+
+        const lineMaker = line()
+          .x((d) => scaleX(d[labels[0]]))
+          .y((d) => scaleY(d[labels[i]]));
+
+        select(`#line${i}`)
+          .append("path")
+          .attr("fill", "none")
+          .attr("stroke", colors[i - 1])
+          .attr("d", lineMaker(dataTable as Iterable<[number, number]>));
       }
     }
   }, [dataTable]);
