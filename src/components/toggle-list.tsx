@@ -14,8 +14,15 @@ export const ToggleList: FunctionComponent<ToggleListProps> = ({ items }) => {
         .selectAll("li")
         .data(items)
         .enter()
-        .append("li")
-        .text((d) => d);
+        .append<HTMLElement & { toggleState: boolean }>("li")
+        .text((d) => d)
+        .on("click", function () {
+          this.toggleState = !this.toggleState;
+          select(this)
+            .transition()
+            .duration(2000)
+            .style("color", this.toggleState ? "red" : "black");
+        });
     }
   }, [items]);
   return <div id="toggle-list" />;
