@@ -23,7 +23,7 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
       const labels = Object.keys(dataTable[0]);
 
       var scaleX = scaleLinear()
-        .domain(extent(dataTable, (d) => Number(d["x"])))
+        .domain(extent(dataTable, (d) => Number(d[labels[0]])))
         .range([margin.left, w + margin.left]);
 
       for (let i = 1; i < labels.length; i++) {
