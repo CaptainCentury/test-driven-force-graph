@@ -16,31 +16,33 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
   var w = 300;
   var h = 300;
 
+  const colors = ["green", "red"];
+
   useEffect(() => {
-    if (dataTable) {
+    if (dataTable && dataTable.length > 0) {
+      const labels = Object.keys(dataTable[0]);
+
       var scaleX = scaleLinear()
         .domain(extent(dataTable, (d) => Number(d["x"])))
         .range([0, w]);
 
-      var scaleY1 = scaleLinear()
-        .domain(extent(dataTable, (d) => Number(d["y1"])))
-        .range([h, 0]);
+      for (let i = 1; i < labels.length; i++) {
+        var scaleY = scaleLinear()
+          .domain(extent(dataTable, (d) => Number(d[labels[i]])))
+          .range([h, 0]);
 
-      var scale2 = scaleLinear()
-        .domain(extent(dataTable, (d) => Number(d["y2"])))
-        .range([h, 0]);
-
-      select("#line-plot")
-        .append("g")
-        .attr("id", "ds1")
-        .selectAll("circle")
-        .data(dataTable)
-        .enter()
-        .append("circle")
-        .attr("r", 5)
-        .attr("fill", "green")
-        .attr("cx", (d) => scaleX(Number(d["x"])))
-        .attr("cy", (d) => scaleY1(Number(d["y1"])));
+        select("#line-plot")
+          .append("g")
+          .attr("id", "ds1")
+          .selectAll("circle")
+          .data(dataTable)
+          .enter()
+          .append("circle")
+          .attr("r", 5)
+          .attr("fill", colors[i - 1])
+          .attr("cx", (d) => scaleX(Number(d["x"])))
+          .attr("cy", (d) => scaleY(Number(d[labels[i]])));
+      }
     }
   }, [dataTable]);
 
