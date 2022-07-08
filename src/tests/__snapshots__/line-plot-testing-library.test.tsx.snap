@@ -61,67 +61,6 @@ exports[`LinePlot renders 1`] = `
 </figure>
 `;
 
-exports[`LinePlot renders 2`] = `
-<figure
-  data-testid="plot1"
->
-  <svg
-    height="360"
-    id="line-plot"
-    style="border-style: solid; border-width: 1px;"
-    width="360"
-  >
-    <g
-      id="line1"
-    >
-      <circle
-        cx="30"
-        cy="180"
-        fill="green"
-        r="5"
-      />
-      <circle
-        cx="330"
-        cy="180"
-        fill="green"
-        r="5"
-      />
-      <path
-        d="M30,180L330,180"
-        fill="none"
-        stroke="green"
-      />
-    </g>
-    <g
-      id="line2"
-    >
-      <circle
-        cx="30"
-        cy="330"
-        fill="red"
-        r="5"
-      />
-      <circle
-        cx="330"
-        cy="30"
-        fill="red"
-        r="5"
-      />
-      <path
-        d="M30,330L330,30"
-        fill="none"
-        stroke="red"
-      />
-    </g>
-  </svg>
-  <figcaption>
-    LINE PLOT (
-    2
-     rows)
-  </figcaption>
-</figure>
-`;
-
 exports[`LinePlot renders for empty data 1`] = `
 <figure
   data-testid="plot1"
