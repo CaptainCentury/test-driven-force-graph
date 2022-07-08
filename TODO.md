@@ -14,6 +14,7 @@
 - wallaby in or out?
 - can snapshot work for graph?
 - handle reading of files in public in test context
+- split out reading tsv files so that plotter can be tested directly
 
 ## Introduce more data
 
