@@ -5,6 +5,8 @@ type ToggleListProps = {
   items: string[];
 };
 
+type TogglableHTMLElement = HTMLElement & { toggleState: boolean };
+
 export const ToggleList: FunctionComponent<ToggleListProps> = ({ items }) => {
   useEffect(() => {
     if (items && items.length > 0) {
@@ -14,7 +16,7 @@ export const ToggleList: FunctionComponent<ToggleListProps> = ({ items }) => {
         .selectAll("li")
         .data(items)
         .enter()
-        .append<HTMLElement & { toggleState: boolean }>("li")
+        .append<TogglableHTMLElement>("li")
         .text((d) => d)
         .on("click", function () {
           this.toggleState = !this.toggleState;

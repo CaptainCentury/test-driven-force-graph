@@ -7,14 +7,18 @@ import {
   scaleLinear,
   select,
 } from "d3";
-import { line, curveStep } from "d3-shape";
+import { line, curveLinear, curveStep, CurveFactory } from "d3-shape";
 
 type LinePlotProps = {
   dataTable: DSVRowArray<string>;
+  curve?: CurveFactory;
+  children?: JSX.Element | string;
 };
 
 export const LinePlot: FunctionComponent<LinePlotProps> = ({
   dataTable,
+  curve = curveStep,
+  children,
   ...props
 }) => {
   const svgRef = useRef(null);
@@ -32,6 +36,8 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
       const svg = select("#line-plot");
       const width = Number(svg.attr("width"));
       const height = Number(svg.attr("height"));
+
+      svg.selectAll("path").remove();
 
       const makeScale = function (accessor, range) {
         return scaleLinear()
@@ -72,7 +78,7 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
           g,
           (d) => scaleX(d[labels[0]]),
           (d) => scaleY(d[labels[i]]),
-          curveStep
+          curve
         );
 
         g.selectAll("circle").attr("fill", colors[i - 1]);
@@ -96,7 +102,7 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
         .attr("transform", "translate(" + margin.left + ", 0)")
         .call(yAxisMaker);
     }
-  }, [dataTable]);
+  }, [dataTable, curve]);
 
   return (
     <figure {...props}>
@@ -108,7 +114,7 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
         height={h + margin.top + margin.bottom}
       />
       <figcaption>
-        LINE PLOT ({dataTable ? dataTable.length : 0} rows)
+        LINE PLOT ({dataTable ? dataTable.length : 0} rows) {children}
       </figcaption>
     </figure>
   );
