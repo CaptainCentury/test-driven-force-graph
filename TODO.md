@@ -4,6 +4,12 @@
 
 - minimize core component dependencies (ideally just React and D3)
 - possibly split plot into plot/plotter, graph/graphographer etc
+- implement general update pattern when good case turns up
+  1. bind new data
+  2. remove `exit()` selection
+  3. create and configure `enter()` selection
+  4. `merge` new and remaining element
+  5. update combined selection based on bound data
 
 ## Development
 
