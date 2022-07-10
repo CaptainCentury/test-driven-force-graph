@@ -94,7 +94,7 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
       for (let i = 1; i < labels.length; i++) {
         var scaleY = makeScale(
           (d) => d[labels[i]],
-          [h + margin.bottom, margin.bottom]
+          [h - margin.bottom, margin.top]
         );
 
         const g = svg.append("g").attr("id", `line${i}`);
