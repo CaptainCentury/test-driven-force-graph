@@ -23,7 +23,7 @@ export const ToggleList: FunctionComponent<ToggleListProps> = ({ items }) => {
           this.toggleState = !this.toggleState;
           select(this)
             .transition()
-            .duration(2000)
+            .duration(1000)
             .style("color", this.toggleState ? "red" : "black");
         });
     }
