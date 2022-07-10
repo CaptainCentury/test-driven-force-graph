@@ -41,6 +41,12 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
           .attr("x", 18 + point[0])
           .attr("y", 6 + point[1])
           .text("" + point[0] + ", " + point[1]);
+      })
+      .on("mouseenter", function (event) {
+        text.attr("visibility", "visible");
+      })
+      .on("mouseleave", function (event) {
+        text.attr("visibility", "hidden");
       });
   };
 
