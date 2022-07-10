@@ -17,7 +17,7 @@ export const ToggleList: FunctionComponent<ToggleListProps> = ({ items }) => {
         .data(items)
         .enter()
         .append<TogglableHTMLElement>("li")
-        .style("cursor", "crosshair")
+        .style("cursor", "pointer")
         .text((d) => d)
         .on("click", function () {
           this.toggleState = !this.toggleState;
