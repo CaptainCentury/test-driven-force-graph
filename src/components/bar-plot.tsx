@@ -45,6 +45,12 @@ export const BarPlot: FunctionComponent<BarPlotProps> = ({
       .delay((d, i) => 200 * i)
       .attr("x1", (_, i) => scaleX(i + 0.5))
       .attr("x2", (_, i) => scaleX(i + 0.5))
+      .each(function (d) {
+        const element = select(this);
+        if (!element.attr("y1")) {
+          element.attr("y1", scaleY(0)).attr("y2", scaleY(0));
+        }
+      })
       .transition()
       .duration(1000)
       .delay((d, i) => 200 * i)
