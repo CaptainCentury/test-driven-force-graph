@@ -91,6 +91,7 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
       .style("stroke-width", 1);
 
     var colors = scaleOrdinal(schemeCategory10);
+    const fontSize = 8;
 
     var nodes = svg
       .selectAll("circle")
@@ -112,6 +113,8 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
           .on("end", dragEnded)
       );
 
+    const radius = visualizer.radius;
+
     var nodeLabels =
       labelMode == "labels" &&
       svg
@@ -128,9 +131,18 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
           return d.y;
         })
         .attr("class", "nodelabel")
-        .attr("stroke", "#000")
+        .attr("fill", "#fff")
+        .attr("stoke", "none")
         .text(function (d) {
           return d.name;
+        })
+        .style("font-size", function (d) {
+          return (
+            Math.min(
+              2 * radius,
+              ((2 * radius - 1) / this.getComputedTextLength()) * fontSize
+            ) + "px"
+          );
         })
         .attr("pointer-events", "none");
 
