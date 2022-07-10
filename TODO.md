@@ -35,27 +35,6 @@
 
 - different types of nodes should have separate styling
 
-## Make label unselectable
-
-[Stack overflow](https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting)
-
-```css
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
-}
-```
-
-```html
-<p>Selectable text.</p>
-<p class="noselect">Unselectable text.</p>
-```
-
 ## Make button labels
 
 - labels should be centered on button

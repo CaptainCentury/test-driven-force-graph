@@ -131,7 +131,8 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
         .attr("stroke", "#000")
         .text(function (d) {
           return d.name;
-        });
+        })
+        .attr("pointer-events", "none");
 
     // simple tooltip
 
