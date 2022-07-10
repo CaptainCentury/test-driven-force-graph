@@ -4,6 +4,7 @@ import {
   axisLeft,
   DSVRowArray,
   extent,
+  pointer,
   scaleLinear,
   select,
 } from "d3";
@@ -29,6 +30,23 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
   var h = 300;
 
   const colors = ["green", "red"];
+
+  const coordPixels = (selector) => {
+    const text = select(selector).append("text");
+    const svg = select(selector)
+      .attr("cursor", "crosshair")
+      .on("mousemove", function (event) {
+        const point = pointer(event);
+        text
+          .attr("x", 18 + point[0])
+          .attr("y", 6 + point[1])
+          .text("" + point[0] + ", " + point[1]);
+      });
+  };
+
+  useEffect(() => {
+    coordPixels("#line-plot");
+  }, []);
 
   useEffect(() => {
     if (dataTable && dataTable.length > 0) {
@@ -109,7 +127,11 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
       <svg
         id="line-plot"
         ref={svgRef}
-        style={{ borderStyle: "solid", borderWidth: "1px" }}
+        style={{
+          borderStyle: "solid",
+          borderWidth: "1px",
+          overflow: "visible",
+        }}
         width={w + margin.left + margin.right}
         height={h + margin.top + margin.bottom}
       />
