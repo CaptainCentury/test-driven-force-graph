@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { LinePlot } from "./components/line-plot";
 import { twoLinesDataPromise } from "./data/two-lines-data";
+import { verticalMedian } from "./curve-factories/vertical-median";
 
 import styled from "styled-components";
 import type { CurveFactory } from "d3-shape";
@@ -50,6 +51,13 @@ export const LinePlotDemo = () => {
             }}
           >
             Natural
+          </CurveButton>
+          <CurveButton
+            onClick={() => {
+              setCurve(() => verticalMedian);
+            }}
+          >
+            Median (custom)
           </CurveButton>
         </>
       </LinePlot>
