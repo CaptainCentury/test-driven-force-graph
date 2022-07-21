@@ -34,6 +34,7 @@
 ## Style nodes according to data properties
 
 - different types of nodes should have separate styling
+- links thickness should reflect weight of link
 
 ## Make button labels
 
