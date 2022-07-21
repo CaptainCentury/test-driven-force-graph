@@ -18,7 +18,7 @@ export const DoughnutDiagram: FunctionComponent<DoughnutDiagramProps> = ({
   var h = 300;
 
   useEffect(() => {
-    const layout = pie<{ name: string; votes: number }>()
+    const doughnut = pie<{ name: string; votes: number }>()
       .value((d) => d.votes)
       .padAngle(0.025)(data);
 
@@ -28,7 +28,7 @@ export const DoughnutDiagram: FunctionComponent<DoughnutDiagramProps> = ({
       .cornerRadius(10);
 
     const scale = scaleOrdinal(schemePastel2).domain(
-      layout.map((d) => d.index.toString())
+      doughnut.map((d) => d.index.toString())
     );
 
     var g = select(svgRef.current)
@@ -39,7 +39,7 @@ export const DoughnutDiagram: FunctionComponent<DoughnutDiagramProps> = ({
       );
 
     g.selectAll("path")
-      .data(layout)
+      .data(doughnut)
       .enter()
       .append("path")
       .attr("d", arcMaker)
@@ -47,7 +47,7 @@ export const DoughnutDiagram: FunctionComponent<DoughnutDiagramProps> = ({
       .attr("stroke", "grey");
 
     g.selectAll("text")
-      .data(layout)
+      .data(doughnut)
       .enter()
       .append("text")
       .text((d) => d.data.name)
