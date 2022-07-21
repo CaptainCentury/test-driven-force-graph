@@ -49,6 +49,17 @@ type ForceGraphProps = {
   children?: JSX.Element | string;
 };
 
+var colors = scaleOrdinal(schemeCategory10);
+
+const NodeButton = (selection, radius, dragStarted, dragging, dragEnded) => {
+  selection
+    .append("circle")
+    .attr("r", radius)
+    .style("fill", function (d, i) {
+      return colors(i.toString());
+    });
+};
+
 const ForceGraph: FunctionComponent<ForceGraphProps> = ({
   dataset,
   labelMode = "labels",
@@ -64,6 +75,28 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
   var h = 300;
 
   useEffect(() => {
+    // define drag events
+    function dragStarted(event, d) {
+      if (!event.active) {
+        force.alphaTarget(0.3).restart();
+      }
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragging(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+
+    function dragEnded(event, d) {
+      if (!event.active) {
+        force.alphaTarget(0);
+      }
+      d.fx = null;
+      d.fy = null;
+    }
+
     // init simple force layout
     var force = forceSimulation(dataset.nodes)
       .force("charge", forceManyBody())
@@ -90,22 +123,14 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
       .style("stroke", "#ccc")
       .style("stroke-width", 1);
 
-    var colors = scaleOrdinal(schemeCategory10);
-    const fontSize = 8;
+    const radius = visualizer.radius;
 
     var nodes = svg
-      .selectAll("circle")
+      .selectAll("g")
       .data(dataset.nodes)
       .enter()
-      .append("circle")
-      .attr("r", visualizer.radius)
-      .attr("cx", function (d, i) {
-        // spread initial positions to avoid stacking nodes
-        return i * visualizer.radius;
-      })
-      .style("fill", function (d, i) {
-        return colors(i.toString());
-      })
+      .append("g")
+      .call(NodeButton, radius, dragStarted, dragging, dragEnded)
       .call(
         drag()
           .on("start", dragStarted)
@@ -113,7 +138,7 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
           .on("end", dragEnded)
       );
 
-    const radius = visualizer.radius;
+    const fontSize = 8;
 
     var nodeLabels =
       labelMode == "labels" &&
@@ -156,6 +181,10 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
 
     // simulation tick definition
     force.on("tick", function () {
+      nodes.attr("transform", function (d: Node) {
+        return `translate(${d.x}, ${d.y})`;
+      });
+
       edges
         .attr("x1", function (d: Edge) {
           return d.source.x;
@@ -170,14 +199,6 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
           return d.target.y;
         });
 
-      nodes
-        .attr("cx", function (d: Node) {
-          return d.x;
-        })
-        .attr("cy", function (d: Node) {
-          return d.y;
-        });
-
       if (nodeLabels) {
         nodeLabels
           .attr("x", function (d) {
@@ -188,28 +209,6 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
           });
       }
     });
-
-    // define drag events
-    function dragStarted(event, d) {
-      if (!event.active) {
-        force.alphaTarget(0.3).restart();
-      }
-      d.fx = d.x;
-      d.fy = d.y;
-    }
-
-    function dragging(event, d) {
-      d.fx = event.x;
-      d.fy = event.y;
-    }
-
-    function dragEnded(event, d) {
-      if (!event.active) {
-        force.alphaTarget(0);
-      }
-      d.fx = null;
-      d.fy = null;
-    }
   }, [dataset, visualizer]);
 
   return (
