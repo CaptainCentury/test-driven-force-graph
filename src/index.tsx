@@ -4,6 +4,7 @@ import { LinePlotDemo } from "./plot-demo";
 import React from "react";
 import { ToggleListDemo } from "./toggle-list-demo";
 import { BarPlotDemo } from "./bar-plot-demo";
+import { DoughnutDemo } from "./doughnut-demo";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -14,5 +15,6 @@ root.render(
     <GraphDemo />
     <LinePlotDemo />
     <BarPlotDemo />
+    <DoughnutDemo />
   </>
 );
