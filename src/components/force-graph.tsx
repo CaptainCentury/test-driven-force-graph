@@ -51,13 +51,37 @@ type ForceGraphProps = {
 
 var colors = scaleOrdinal(schemeCategory10);
 
-const NodeButton = (selection, radius, dragStarted, dragging, dragEnded) => {
+const nodeButton = (selection, radius, labelMode) => {
   selection
     .append("circle")
     .attr("r", radius)
     .style("fill", function (d, i) {
       return colors(i.toString());
     });
+
+  const fontSize = 8;
+
+  if (labelMode === "labels") {
+    selection
+      .append("text")
+      .attr("text-anchor", "middle")
+      .attr("dy", "0.3em")
+      .attr("class", "nodelabel")
+      .attr("fill", "#fff")
+      .attr("stoke", "none")
+      .text(function (d) {
+        return d.name;
+      })
+      .style("font-size", function (d) {
+        return (
+          Math.min(
+            2 * radius,
+            ((2 * radius - 1) / this.getComputedTextLength()) * fontSize
+          ) + "px"
+        );
+      })
+      .attr("pointer-events", "none");
+  }
 };
 
 const ForceGraph: FunctionComponent<ForceGraphProps> = ({
@@ -78,7 +102,7 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
     // define drag events
     function dragStarted(event, d) {
       if (!event.active) {
-        force.alphaTarget(0.3).restart();
+        layout.alphaTarget(0.3).restart();
       }
       d.fx = d.x;
       d.fy = d.y;
@@ -91,14 +115,13 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
 
     function dragEnded(event, d) {
       if (!event.active) {
-        force.alphaTarget(0);
+        layout.alphaTarget(0);
       }
       d.fx = null;
       d.fy = null;
     }
 
-    // init simple force layout
-    var force = forceSimulation(dataset.nodes)
+    var layout = forceSimulation(dataset.nodes)
       .force("charge", forceManyBody())
       .force("link", forceLink(dataset.edges).strength(visualizer.linkStrength))
       .force(
@@ -108,7 +131,6 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
           .y(h / 2)
       );
 
-    // display
     var svgElement = select(svgRef.current);
     svgElement.selectAll("*").remove();
     const svg = svgElement
@@ -130,48 +152,13 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
       .data(dataset.nodes)
       .enter()
       .append("g")
-      .call(NodeButton, radius, dragStarted, dragging, dragEnded)
+      .call(nodeButton, radius, labelMode)
       .call(
         drag()
           .on("start", dragStarted)
           .on("drag", dragging)
           .on("end", dragEnded)
       );
-
-    const fontSize = 8;
-
-    var nodeLabels =
-      labelMode == "labels" &&
-      svg
-        .selectAll(".nodelabel")
-        .data<Edge>(dataset.nodes)
-        .enter()
-        .append("text")
-        .attr("text-anchor", "middle")
-        .attr("dy", "0.3em")
-        .attr("x", function (d) {
-          return d.x;
-        })
-        .attr("y", function (d) {
-          return d.y;
-        })
-        .attr("class", "nodelabel")
-        .attr("fill", "#fff")
-        .attr("stoke", "none")
-        .text(function (d) {
-          return d.name;
-        })
-        .style("font-size", function (d) {
-          return (
-            Math.min(
-              2 * radius,
-              ((2 * radius - 1) / this.getComputedTextLength()) * fontSize
-            ) + "px"
-          );
-        })
-        .attr("pointer-events", "none");
-
-    // simple tooltip
 
     if (labelMode == "tooltip") {
       nodes.append("title").text(function (d: { name: string }) {
@@ -180,7 +167,7 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
     }
 
     // simulation tick definition
-    force.on("tick", function () {
+    layout.on("tick", function () {
       nodes.attr("transform", function (d: Node) {
         return `translate(${d.x}, ${d.y})`;
       });
@@ -198,16 +185,6 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
         .attr("y2", function (d: Edge) {
           return d.target.y;
         });
-
-      if (nodeLabels) {
-        nodeLabels
-          .attr("x", function (d) {
-            return d.x;
-          })
-          .attr("y", function (d) {
-            return d.y;
-          });
-      }
     });
   }, [dataset, visualizer]);
 
