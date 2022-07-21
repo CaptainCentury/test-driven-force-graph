@@ -26,6 +26,7 @@ export const DoughnutDiagram: FunctionComponent<DoughnutDiagramProps> = ({
       .innerRadius(50)
       .outerRadius(150)
       .cornerRadius(10);
+
     const scale = scaleOrdinal(schemePastel2).domain(
       layout.map((d) => d.index.toString())
     );
