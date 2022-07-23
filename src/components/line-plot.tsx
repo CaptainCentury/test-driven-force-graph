@@ -31,7 +31,7 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
 
   const colors = ["green", "red"];
 
-  const coordPixels = (selector) => {
+  const coordPixels = (selector, scaleX, scaleY) => {
     const text = select(selector).append("text");
     const svg = select(selector)
       .attr("cursor", "crosshair")
@@ -40,7 +40,12 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
         text
           .attr("x", 18 + point[0])
           .attr("y", 6 + point[1])
-          .text("" + point[0] + ", " + point[1]);
+          .text(
+            "" +
+              scaleX.invert(point[0]).toFixed(2) +
+              ", " +
+              scaleY.invert(point[1]).toFixed(2)
+          );
       })
       .on("mouseenter", function (event) {
         text.attr("visibility", "visible");
@@ -49,10 +54,6 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
         text.attr("visibility", "hidden");
       });
   };
-
-  useEffect(() => {
-    coordPixels("#line-plot");
-  }, []);
 
   useEffect(() => {
     if (dataTable && dataTable.length > 0) {
@@ -109,10 +110,12 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
         g.selectAll("path").attr("stroke", colors[i - 1]);
       }
 
-      const xAxisMaker = axisBottom(scaleX);
-      const yAxisMaker = axisLeft(
-        makeScale((d) => d[labels[1]], [h + margin.bottom, margin.bottom])
+      const scaleYAxis = makeScale(
+        (d) => d[labels[1]],
+        [h + margin.bottom, margin.bottom]
       );
+      const xAxisMaker = axisBottom(scaleX);
+      const yAxisMaker = axisLeft(scaleYAxis);
 
       svg
         .append("g")
@@ -125,6 +128,8 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
         .append("g")
         .attr("transform", "translate(" + margin.left + ", 0)")
         .call(yAxisMaker);
+
+      coordPixels(svgRef.current, scaleX, scaleYAxis);
     }
   }, [dataTable, curve]);
 
