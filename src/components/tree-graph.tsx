@@ -1,21 +1,31 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
-import { cluster, hierarchy, linkVertical, select, tree } from "d3";
+import {
+  cluster,
+  hierarchy,
+  linkHorizontal,
+  linkVertical,
+  select,
+  tree,
+} from "d3";
 
 type TreeDataNode = {
   children: TreeDataNode[];
 };
 
 export type Layout = "tree" | "cluster";
+export type Orientation = "vertical" | "horizontal";
 
 type TreeGraphProps = {
   data: TreeDataNode;
   layout?: Layout;
+  orientation?: Orientation;
   children?: string | JSX.Element | JSX.Element[];
 };
 
 export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
   data,
   layout = "cluster",
+  orientation = "vertical",
   children,
   ...props
 }) => {
@@ -47,9 +57,16 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
       .append("g")
       .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    const lineMaker = linkVertical<any, { x: number; y: number }>()
-      .x((d) => d.x)
-      .y((d) => d.y);
+    const xAccessor = (d) => (orientation === "vertical" ? d.x : d.y);
+    const yAccessor = (d) => (orientation === "vertical" ? d.y : d.x);
+
+    const lineMaker = (
+      orientation === "vertical"
+        ? linkVertical<any, { x: number; y: number }>()
+        : linkHorizontal<any, { x: number; y: number }>()
+    )
+      .x(xAccessor)
+      .y(yAccessor);
 
     g.selectAll("path")
       .data(nodes.links())
@@ -64,8 +81,8 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
       .enter()
       .append("circle")
       .attr("r", 5)
-      .attr("cx", (d) => d.x)
-      .attr("cy", (d) => d.y);
+      .attr("cx", xAccessor)
+      .attr("cy", yAccessor);
   }, [layout]);
 
   return (
