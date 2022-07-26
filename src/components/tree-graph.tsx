@@ -1,11 +1,17 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { hierarchy, linkVertical, select, tree } from "d3";
 
+type TreeDataNode = {
+  children: TreeDataNode[];
+};
+
 type TreeGraphProps = {
+  data: TreeDataNode;
   children?: string | JSX.Element | JSX.Element[];
 };
 
 export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
+  data,
   children,
   ...props
 }) => {
@@ -16,7 +22,6 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
   const h = 300;
 
   useEffect(() => {
-    const data = { children: [{ children: [] }, { children: [] }] };
     const nodes = hierarchy(data, (d) => d.children);
     tree().size([250, 250])(nodes);
 
