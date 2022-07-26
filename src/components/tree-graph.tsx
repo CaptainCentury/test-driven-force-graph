@@ -1,17 +1,21 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
-import { hierarchy, linkVertical, select, tree } from "d3";
+import { cluster, hierarchy, linkVertical, select, tree } from "d3";
 
 type TreeDataNode = {
   children: TreeDataNode[];
 };
 
+type Layout = "tree" | "cluster";
+
 type TreeGraphProps = {
   data: TreeDataNode;
+  layout?: Layout;
   children?: string | JSX.Element | JSX.Element[];
 };
 
 export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
   data,
+  layout = "cluster",
   children,
   ...props
 }) => {
@@ -24,8 +28,14 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
 
   useEffect(() => {
     const nodes = hierarchy(data, (d) => d.children);
-    tree().size([w, h])(nodes);
-
+    if (layout === "tree") {
+      tree().size([w, h])(nodes);
+    } else if (layout === "cluster") {
+      nodes.sort((a, b) => b.height - a.height);
+      cluster().size([w, h])(nodes);
+    } else {
+      throw new Error("Unimplemented layout option");
+    }
     nodes.count();
     setNoLeaves(nodes.value ?? 0);
 
