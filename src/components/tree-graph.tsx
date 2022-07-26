@@ -12,7 +12,7 @@ type TreeDataNode = {
   children: TreeDataNode[];
 };
 
-export type Layout = "tree" | "cluster";
+export type Layout = "tree" | "cluster" | "radial";
 export type Orientation = "vertical" | "horizontal";
 
 type TreeGraphProps = {
@@ -22,9 +22,17 @@ type TreeGraphProps = {
   children?: string | JSX.Element | JSX.Element[];
 };
 
+const hTransformation = (r: number, phi: number) => {
+  return r * Math.sin(phi);
+};
+
+const vTransformation = (r: number, phi: number) => {
+  return -r * Math.cos(phi);
+};
+
 export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
   data,
-  layout = "cluster",
+  layout = "tree",
   orientation = "vertical",
   children,
   ...props
@@ -44,6 +52,9 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
     } else if (layout === "cluster") {
       nodes.sort((a, b) => b.height - a.height);
       cluster().size([w, h])(nodes);
+    } else if (layout === "radial") {
+      nodes.sort((a, b) => b.height - a.height);
+      cluster().size([2 * Math.PI, w / 2])(nodes);
     } else {
       throw new Error("Unimplemented layout option");
     }
@@ -53,28 +64,63 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
     nodes.sum((d) => 1);
     setNoNodes(nodes.value ?? 0);
 
+    const shift = [
+      (layout === "radial" ? w / 2 : 0) + margin.left,
+      (layout === "radial" ? w / 2 : 0) + margin.top,
+    ];
+
     const g = select(svgRef.current)
       .append("g")
-      .attr("transform", `translate(${margin.left}, ${margin.top})`);
+      .attr("transform", `translate(${shift[0]}, ${shift[1]})`);
 
-    const xAccessor = (d) => (orientation === "vertical" ? d.x : d.y);
-    const yAccessor = (d) => (orientation === "vertical" ? d.y : d.x);
+    const xAccessor = (d) =>
+      layout === "radial"
+        ? hTransformation(d.y, d.x)
+        : orientation === "vertical"
+        ? d.x
+        : d.y;
+    const yAccessor = (d) =>
+      layout === "radial"
+        ? vTransformation(d.y, d.x)
+        : orientation === "vertical"
+        ? d.y
+        : d.x;
 
-    const lineMaker = (
-      orientation === "vertical"
-        ? linkVertical<any, { x: number; y: number }>()
-        : linkHorizontal<any, { x: number; y: number }>()
-    )
-      .x(xAccessor)
-      .y(yAccessor);
+    if (layout === "radial") {
+      g.selectAll("line")
+        .data(nodes.links())
+        .enter()
+        .append("line")
+        .attr("stroke", "red")
+        .attr("x1", (d) =>
+          hTransformation((d.source as any).y, (d.source as any).x)
+        )
+        .attr("y1", (d) =>
+          vTransformation((d.source as any).y, (d.source as any).x)
+        )
+        .attr("x2", (d) =>
+          hTransformation((d.target as any).y, (d.target as any).x)
+        )
+        .attr("y2", (d) =>
+          vTransformation((d.target as any).y, (d.target as any).x)
+        );
+    } else {
+      const lineMaker = (
+        orientation === "vertical"
+          ? linkVertical<any, { x: number; y: number }>()
+          : linkHorizontal<any, { x: number; y: number }>()
+      )
+        .x(xAccessor)
+        .y(yAccessor);
 
-    g.selectAll("path")
-      .data(nodes.links())
-      .enter()
-      .append("path")
-      .attr("d", (d) => lineMaker(d))
-      .attr("stroke", "red")
-      .attr("fill", "none");
+      g.selectAll("path")
+        .data(nodes.links())
+        .enter()
+        .append("path")
+        .attr("d", (d) => lineMaker(d))
+        .attr("stroke", "red")
+        .attr("fill", "none");
+    }
 
     g.selectAll("circle")
       .data<any>(nodes.descendants())

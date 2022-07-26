@@ -34,7 +34,7 @@ export const LayoutButton = styled(BasicButton)`
 `;
 
 export const TreeDemo = () => {
-  const [layout, setLayout] = useState<Layout>("tree");
+  const [layout, setLayout] = useState<Layout>("radial");
   return (
     <>
       <h1>TreeGraph demo</h1>
@@ -52,6 +52,13 @@ export const TreeDemo = () => {
           }}
         >
           Cluster
+        </LayoutButton>
+        <LayoutButton
+          onClick={() => {
+            setLayout("radial");
+          }}
+        >
+          Radial
         </LayoutButton>
       </TreeGraph>
     </>
