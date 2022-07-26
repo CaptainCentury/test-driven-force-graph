@@ -23,13 +23,13 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
 
   useEffect(() => {
     const nodes = hierarchy(data, (d) => d.children);
-    tree().size([250, 250])(nodes);
+    tree().size([w, h])(nodes);
 
     nodes.count();
     setNoNodes(nodes.value ?? 0);
     const g = select(svgRef.current)
       .append("g")
-      .attr("transform", "translate(25, 25)");
+      .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     const lineMaker = linkVertical<any, { x: number; y: number }>()
       .x((d) => d.x)
