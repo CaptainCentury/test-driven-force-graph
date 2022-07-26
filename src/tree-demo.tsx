@@ -1,5 +1,7 @@
-import React from "react";
-import { TreeGraph } from "./components/tree-graph";
+import React, { useState } from "react";
+import { Layout, TreeGraph } from "./components/tree-graph";
+
+import styled from "styled-components";
 
 const leaf = { children: [] };
 const data = {
@@ -19,11 +21,39 @@ const data = {
   ],
 };
 
+const BasicButton = styled.button`
+  background: blue;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  margin: 2px;
+`;
+
+export const LayoutButton = styled(BasicButton)`
+  background: red;
+`;
+
 export const TreeDemo = () => {
+  const [layout, setLayout] = useState<Layout>("tree");
   return (
     <>
       <h1>TreeGraph demo</h1>
-      <TreeGraph data={data} />
+      <TreeGraph data={data} layout={layout}>
+        <LayoutButton
+          onClick={() => {
+            setLayout("tree");
+          }}
+        >
+          Tree
+        </LayoutButton>
+        <LayoutButton
+          onClick={() => {
+            setLayout("cluster");
+          }}
+        >
+          Cluster
+        </LayoutButton>
+      </TreeGraph>
     </>
   );
 };

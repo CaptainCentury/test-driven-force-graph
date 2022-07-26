@@ -5,7 +5,7 @@ type TreeDataNode = {
   children: TreeDataNode[];
 };
 
-type Layout = "tree" | "cluster";
+export type Layout = "tree" | "cluster";
 
 type TreeGraphProps = {
   data: TreeDataNode;
@@ -28,6 +28,7 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
 
   useEffect(() => {
     const nodes = hierarchy(data, (d) => d.children);
+    select(svgRef.current).selectAll("g").remove();
     if (layout === "tree") {
       tree().size([w, h])(nodes);
     } else if (layout === "cluster") {
@@ -65,7 +66,7 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
       .attr("r", 5)
       .attr("cx", (d) => d.x)
       .attr("cy", (d) => d.y);
-  }, []);
+  }, [layout]);
 
   return (
     <figure {...props}>
