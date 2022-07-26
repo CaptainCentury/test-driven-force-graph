@@ -15,6 +15,7 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
   children,
   ...props
 }) => {
+  const [noLeaves, setNoLeaves] = useState(0);
   const [noNodes, setNoNodes] = useState(0);
   const svgRef = useRef(null);
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
@@ -26,7 +27,11 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
     tree().size([w, h])(nodes);
 
     nodes.count();
+    setNoLeaves(nodes.value ?? 0);
+
+    nodes.sum((d) => 1);
     setNoNodes(nodes.value ?? 0);
+
     const g = select(svgRef.current)
       .append("g")
       .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -66,7 +71,7 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
         height={h + margin.top + margin.bottom}
       />
       <figcaption>
-        TREE GRAPH ({noNodes}) {children}
+        TREE GRAPH ({noNodes} nodes with {noLeaves} leaves) {children}
       </figcaption>
     </figure>
   );
