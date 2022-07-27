@@ -2,7 +2,7 @@ import React from "react";
 import { TreeMap } from "./components/tree-map";
 
 const leaf = (s) => {
-  return { size: { s }, children: [] };
+  return { size: s, name: `SIZE ${s}`, children: [] };
 };
 const data = {
   children: [
