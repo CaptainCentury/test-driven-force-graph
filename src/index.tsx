@@ -5,7 +5,8 @@ import React from "react";
 import { ToggleListDemo } from "./toggle-list-demo";
 import { BarPlotDemo } from "./bar-plot-demo";
 import { DoughnutDemo } from "./doughnut-demo";
-import { TreeDemo } from "./tree-demo";
+import { TreeGraphDemo } from "./tree-graph-demo";
+import { TreeMapDemo } from "./tree-map-demo";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -17,6 +18,7 @@ root.render(
     <LinePlotDemo />
     <BarPlotDemo />
     <DoughnutDemo />
-    <TreeDemo />
+    <TreeGraphDemo />
+    <TreeMapDemo />
   </>
 );

@@ -33,7 +33,7 @@ export const LayoutButton = styled(BasicButton)`
   background: red;
 `;
 
-export const TreeDemo = () => {
+export const TreeGraphDemo = () => {
   const [layout, setLayout] = useState<Layout>("radial");
   return (
     <>
