@@ -18,10 +18,10 @@ export const DataButton = styled(BasicButton)`
 `;
 
 export const GraphDemo = () => {
-  const [radius, setRadius] = useState(10);
-  const [linkStrength, setLinkStrength] = useState(0.01);
+  const [radius, setRadius] = useState(30);
+  const [linkStrength, setLinkStrength] = useState(0.5);
   const [data, setData] = useState(namesData);
-  const [visualizer, setVisualizer] = useState(new Visualizer(20, 1));
+  const [visualizer, setVisualizer] = useState(new Visualizer(radius, 1));
 
   useEffect(() => {
     const update = visualizer.instance();

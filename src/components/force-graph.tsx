@@ -3,6 +3,7 @@ import { forceSimulation } from "d3-force";
 import {
   drag,
   forceCenter,
+  forceCollide,
   forceLink,
   forceManyBody,
   scaleOrdinal,
@@ -121,9 +122,16 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
       d.fy = null;
     }
 
+    const radius = visualizer.radius;
     var layout = forceSimulation(dataset.nodes)
-      .force("charge", forceManyBody())
-      .force("link", forceLink(dataset.edges).strength(visualizer.linkStrength))
+      .force("charge", forceManyBody().strength(-5))
+      .force(
+        "link",
+        forceLink(dataset.edges)
+          .distance(4 * radius)
+          .strength(visualizer.linkStrength)
+      )
+      .force("collide", forceCollide(100).radius(1.5 * radius))
       .force(
         "center",
         forceCenter()
@@ -144,8 +152,6 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
       .append("line")
       .style("stroke", "#ccc")
       .style("stroke-width", 1);
-
-    const radius = visualizer.radius;
 
     var nodes = svg
       .selectAll("g")
