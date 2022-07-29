@@ -37,7 +37,7 @@
 - links thickness should reflect weight of link
 
 ## Make button labels
-ß
+
 - labels and tooltips should work together
 
 ## Make graph zoomable (scrollable)
