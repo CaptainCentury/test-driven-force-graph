@@ -7,6 +7,7 @@ import { BarPlotDemo } from "./bar-plot-demo";
 import { DoughnutDemo } from "./doughnut-demo";
 import { TreeGraphDemo } from "./tree-graph-demo";
 import { TreeMapDemo } from "./tree-map-demo";
+import { HistogramDemo } from "./histogram-demo";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -20,5 +21,6 @@ root.render(
     <DoughnutDemo />
     <TreeGraphDemo />
     <TreeMapDemo />
+    <HistogramDemo />
   </>
 );
