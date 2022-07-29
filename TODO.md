@@ -37,8 +37,7 @@
 - links thickness should reflect weight of link
 
 ## Make button labels
-
-- all nodes of a certain type should be equally sized (or at least size should reflect some properties of the node rather than label size)
+ß
 - labels and tooltips should work together
 
 ## Make graph zoomable (scrollable)
