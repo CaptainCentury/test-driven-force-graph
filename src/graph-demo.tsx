@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ForceGraph, { Visualizer } from "./components/force-graph";
 import namesData from "./data/names";
 import abcData from "./data/abc";
+import { yarnball } from "./data/network-helper";
 
 const BasicButton = styled.button`
   background: blue;
@@ -54,6 +55,7 @@ export const GraphDemo = () => {
           >
             ABC
           </DataButton>
+          <DataButton onClick={() => setData(yarnball)}>Yarnball</DataButton>
         </div>
       </ForceGraph>
       <p>
