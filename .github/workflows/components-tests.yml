@@ -16,3 +16,4 @@ jobs:
           node-version: "18.2"
       - run: npm ci
       - run: npx jest --version
+      - run: npx jest
