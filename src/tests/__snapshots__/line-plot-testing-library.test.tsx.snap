@@ -5,9 +5,10 @@ exports[`LinePlot renders 1`] = `
   data-testid="plot1"
 >
   <svg
+    cursor="crosshair"
     height="360"
     id="line-plot"
-    style="border-style: solid; border-width: 1px;"
+    style="border-style: solid; border-width: 1px; overflow: visible;"
     width="360"
   >
     <g
@@ -15,18 +16,18 @@ exports[`LinePlot renders 1`] = `
     >
       <circle
         cx="30"
-        cy="180"
+        cy="150"
         fill="green"
         r="5"
       />
       <circle
         cx="330"
-        cy="180"
+        cy="150"
         fill="green"
         r="5"
       />
       <path
-        d="M30,180L180,180L180,180L330,180"
+        d="M30,150L180,150L180,150L330,150"
         fill="none"
         stroke="green"
       />
@@ -36,7 +37,7 @@ exports[`LinePlot renders 1`] = `
     >
       <circle
         cx="30"
-        cy="318.4615384615384"
+        cy="260.7692307692307"
         fill="red"
         r="5"
       />
@@ -47,7 +48,7 @@ exports[`LinePlot renders 1`] = `
         r="5"
       />
       <path
-        d="M30,318.4615384615384L180,318.4615384615384L180,30L330,30"
+        d="M30,260.7692307692307L180,260.7692307692307L180,30L330,30"
         fill="none"
         stroke="red"
       />
@@ -282,11 +283,12 @@ exports[`LinePlot renders 1`] = `
         </text>
       </g>
     </g>
+    <text />
   </svg>
   <figcaption>
     LINE PLOT (
     2
-     rows)
+     rows) 
   </figcaption>
 </figure>
 `;
@@ -298,13 +300,13 @@ exports[`LinePlot renders for empty data 1`] = `
   <svg
     height="360"
     id="line-plot"
-    style="border-style: solid; border-width: 1px;"
+    style="border-style: solid; border-width: 1px; overflow: visible;"
     width="360"
   />
   <figcaption>
     LINE PLOT (
     0
-     rows)
+     rows) 
   </figcaption>
 </figure>
 `;
@@ -316,13 +318,13 @@ exports[`LinePlot renders for undefined data 1`] = `
   <svg
     height="360"
     id="line-plot"
-    style="border-style: solid; border-width: 1px;"
+    style="border-style: solid; border-width: 1px; overflow: visible;"
     width="360"
   />
   <figcaption>
     LINE PLOT (
     0
-     rows)
+     rows) 
   </figcaption>
 </figure>
 `;
