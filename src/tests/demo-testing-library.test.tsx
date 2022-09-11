@@ -30,7 +30,7 @@ describe("Demo component", () => {
   it("renders correct number of buttons", () => {
     const { getAllByRole } = render(<GraphDemo />);
     const elements = getAllByRole("button");
-    expect(elements.length).toBe(2);
+    expect(elements.length).toBe(3);
   });
 
   it("renders element Donovan in the graph", () => {
