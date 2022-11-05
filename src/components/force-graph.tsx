@@ -29,15 +29,15 @@ export class Visualizer {
   }
 }
 
-type Node = {
+type GraphNode = {
   x: number;
   y: number;
 };
 
 type Edge = {
   name: string;
-  source: Node;
-  target: Node;
+  source: GraphNode;
+  target: GraphNode;
   x: number;
   y: number;
 };
@@ -74,11 +74,13 @@ const nodeButton = (selection, radius, labelMode) => {
         return d.name;
       })
       .style("font-size", function (d) {
+        const elementLength = this.getComputedTextLength
+          ? (this as SVGTextContentElement).getComputedTextLength()
+          : 1;
+
         return (
-          Math.min(
-            2 * radius,
-            ((2 * radius - 1) / this.getComputedTextLength()) * fontSize
-          ) + "px"
+          Math.min(2 * radius, ((2 * radius - 1) / elementLength) * fontSize) +
+          "px"
         );
       })
       .attr("pointer-events", "none");
@@ -174,7 +176,7 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
 
     // simulation tick definition
     layout.on("tick", function () {
-      nodes.attr("transform", function (d: Node) {
+      nodes.attr("transform", function (d: GraphNode) {
         return `translate(${d.x}, ${d.y})`;
       });
 
