@@ -15,6 +15,11 @@ describe("Data button", () => {
 });
 
 describe("Demo component", () => {
+  it("to render correctly", () => {
+    const component = render(<GraphDemo />);
+    expect(component).toMatchSnapshot();
+  });
+
   it("renders Abc dataset button", () => {
     const { getByText } = render(<GraphDemo />);
     const element = getByText("ABC");
@@ -56,7 +61,7 @@ describe("Demo component", () => {
 
   it("styles ABC dataset button", () => {
     const { getByText } = render(<GraphDemo />);
-    const abcButton = getByText(/abc/i);
+    const abcButton = getByText("ABC");
     expect(abcButton).toHaveStyleRule("background", "green");
     expect(abcButton).toHaveStyleRule("border-radius", "3px");
   });
