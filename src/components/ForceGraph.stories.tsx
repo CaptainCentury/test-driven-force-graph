@@ -18,24 +18,24 @@ const Template: ComponentStory<typeof ForceGraph> = (args) => (
   <ForceGraph {...args} />
 );
 
-export const abc = Template.bind({});
-abc.args = {
+export const Abc = Template.bind({});
+Abc.args = {
   style: { color: "blue" },
   visualizer: new Visualizer(30, 1),
   dataset: abcData,
   labelMode: "labels",
 };
 
-export const names = Template.bind({});
-names.args = {
+export const Names = Template.bind({});
+Names.args = {
   style: { color: "blue" },
   visualizer: new Visualizer(30, 1),
   dataset: namesData,
   labelMode: "labels",
 };
 
-export const yarn = Template.bind({});
-yarn.args = {
+export const Yarn = Template.bind({});
+Yarn.args = {
   style: { color: "blue" },
   visualizer: new Visualizer(30, 1),
   dataset: yarnball,
