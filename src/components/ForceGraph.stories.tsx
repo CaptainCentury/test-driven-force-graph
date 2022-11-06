@@ -1,7 +1,12 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import ForceGraph from "./force-graph";
+import styled from "styled-components";
+
+import ForceGraph, { Visualizer } from "./force-graph";
+import namesData from "../data/names";
+import abcData from "../data/abc";
+import { yarnball } from "../data/network-helper";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -21,6 +26,8 @@ const Template: ComponentStory<typeof ForceGraph> = (args) => (
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  primary: true,
-  label: "Button",
+  style: { color: "blue" },
+  visualizer: new Visualizer(30, 1),
+  dataset: abcData,
+  labelMode: "labels",
 };
