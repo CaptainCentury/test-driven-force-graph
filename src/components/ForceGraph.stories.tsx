@@ -1,8 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import styled from "styled-components";
-
 import ForceGraph, { Visualizer } from "./force-graph";
 import namesData from "../data/names";
 import abcData from "../data/abc";
@@ -23,11 +21,27 @@ const Template: ComponentStory<typeof ForceGraph> = (args) => (
   <ForceGraph {...args} />
 );
 
-export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
+export const abc = Template.bind({});
+abc.args = {
   style: { color: "blue" },
   visualizer: new Visualizer(30, 1),
   dataset: abcData,
+  labelMode: "labels",
+};
+
+export const names = Template.bind({});
+names.args = {
+  style: { color: "blue" },
+  visualizer: new Visualizer(30, 1),
+  dataset: namesData,
+  labelMode: "labels",
+};
+
+export const yarn = Template.bind({});
+yarn.args = {
+  style: { color: "blue" },
+  visualizer: new Visualizer(30, 1),
+  dataset: yarnball,
   labelMode: "labels",
 };
