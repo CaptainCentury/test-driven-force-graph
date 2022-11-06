@@ -66,6 +66,7 @@
     "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
+    "@types/react": "18.0.25",
     "d3": "7.4.4",
     "d3-force": "3.0.0",
     "d3-shape": "3.1.0",
