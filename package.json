@@ -13,7 +13,8 @@
     "lint:css": "stylelint **/*.js",
     "lint": "npm run lint:js && npm run lint:css",
     "format": "prettier-eslint --write ./src/**/*.js",
-    "dev": "webpack-dev-server --config webpack.config.js --open --mode development"
+    "dev": "webpack-dev-server --config webpack.config.js --open --mode development",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -35,7 +36,7 @@
     "eslint": "8.16.0",
     "eslint-plugin-jest": "26.4.5",
     "eslint-plugin-react": "7.30.0",
-    "husky": "8.0.1",
+    "husky": "^8.0.0",
     "jest": "28.1.0",
     "jest-environment-jsdom": "28.1.0",
     "jest-styled-components": "7.0.8",
@@ -60,10 +61,5 @@
     "react-dom": "18.1.0",
     "serve": "13.0.2",
     "styled-components": "^5.3.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "eslint ."
-    }
   }
 }
