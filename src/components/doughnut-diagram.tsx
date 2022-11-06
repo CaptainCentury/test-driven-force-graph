@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useEffect, useRef } from "react";
-import { Arc, arc, pie, scaleOrdinal, schemePastel2, select } from "d3";
+import { arc, pie, PieArcDatum, scaleOrdinal, schemePastel2, select } from "d3";
+
+type VoteData = { name: string; votes: number };
 
 type DoughnutDiagramProps = {
-  data: { name: string; votes: number }[];
+  data: VoteData[];
   children?: string | JSX.Element | JSX.Element[];
 };
 
@@ -14,15 +16,15 @@ export const DoughnutDiagram: FunctionComponent<DoughnutDiagramProps> = ({
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
 
   // define display
-  var w = 300;
-  var h = 300;
+  const w = 300;
+  const h = 300;
 
   useEffect(() => {
     const doughnut = pie<{ name: string; votes: number }>()
       .value((d) => d.votes)
       .padAngle(0.025)(data);
 
-    const arcMaker: Arc<any, any> = arc<{ name: string; votes: number }[]>()
+    const arcMaker = arc<PieArcDatum<VoteData>>()
       .innerRadius(50)
       .outerRadius(150)
       .cornerRadius(10);
@@ -31,7 +33,7 @@ export const DoughnutDiagram: FunctionComponent<DoughnutDiagramProps> = ({
       doughnut.map((d) => d.index.toString())
     );
 
-    var g = select(svgRef.current)
+    const g = select(svgRef.current)
       .append("g")
       .attr(
         "transform",

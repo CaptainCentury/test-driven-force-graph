@@ -8,7 +8,7 @@ import {
   scaleLinear,
   select,
 } from "d3";
-import { line, curveLinear, curveStep, CurveFactory } from "d3-shape";
+import { line, curveStep, CurveFactory } from "d3-shape";
 
 type LinePlotProps = {
   dataTable: DSVRowArray<string>;
@@ -26,14 +26,14 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
 
   // define display
-  var w = 300;
-  var h = 300;
+  const w = 300;
+  const h = 300;
 
   const colors = ["green", "red"];
 
   const coordPixels = (selector, scaleX, scaleY) => {
     const text = select(selector).append("text");
-    const svg = select(selector)
+    select(selector)
       .attr("cursor", "crosshair")
       .on("mousemove", function (event) {
         const point = pointer(event);
@@ -47,10 +47,10 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
               scaleY.invert(point[1]).toFixed(2)
           );
       })
-      .on("mouseenter", function (event) {
+      .on("mouseenter", function () {
         text.attr("visibility", "visible");
       })
-      .on("mouseleave", function (event) {
+      .on("mouseleave", function () {
         text.attr("visibility", "hidden");
       });
   };
@@ -59,7 +59,6 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
     if (dataTable && dataTable.length > 0) {
       const labels = Object.keys(dataTable[0]);
       const svg = select("#line-plot");
-      const width = Number(svg.attr("width"));
       const height = Number(svg.attr("height"));
 
       svg.selectAll("path").remove();
@@ -93,7 +92,7 @@ export const LinePlot: FunctionComponent<LinePlotProps> = ({
       };
 
       for (let i = 1; i < labels.length; i++) {
-        var scaleY = makeScale(
+        const scaleY = makeScale(
           (d) => d[labels[i]],
           [h - margin.bottom, margin.top]
         );

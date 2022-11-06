@@ -43,14 +43,14 @@ type Edge = {
 };
 
 type ForceGraphProps = {
-  dataset: any;
+  dataset: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   labelMode?: string;
   visualizer?: Visualizer;
   style?: React.CSSProperties;
   children?: JSX.Element | string;
 };
 
-var colors = scaleOrdinal(schemeCategory10);
+const colors = scaleOrdinal(schemeCategory10);
 
 const nodeButton = (selection, radius, labelMode) => {
   selection
@@ -73,7 +73,7 @@ const nodeButton = (selection, radius, labelMode) => {
       .text(function (d) {
         return d.name;
       })
-      .style("font-size", function (d) {
+      .style("font-size", function () {
         const elementLength = this.getComputedTextLength
           ? (this as SVGTextContentElement).getComputedTextLength()
           : 1;
@@ -98,8 +98,8 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
 
   // define display
-  var w = 300;
-  var h = 300;
+  const w = 300;
+  const h = 300;
 
   useEffect(() => {
     // define drag events
@@ -125,7 +125,7 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
     }
 
     const radius = visualizer.radius;
-    var layout = forceSimulation(dataset.nodes)
+    const layout = forceSimulation(dataset.nodes)
       .force("charge", forceManyBody().strength(-5))
       .force(
         "link",
@@ -141,13 +141,13 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
           .y(h / 2)
       );
 
-    var svgElement = select(svgRef.current);
+    const svgElement = select(svgRef.current);
     svgElement.selectAll("*").remove();
     const svg = svgElement
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    var edges = svg
+    const edges = svg
       .selectAll("line")
       .data(dataset.edges)
       .enter()
@@ -155,7 +155,7 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
       .style("stroke", "#ccc")
       .style("stroke-width", 1);
 
-    var nodes = svg
+    const nodes = svg
       .selectAll("g")
       .data(dataset.nodes)
       .enter()

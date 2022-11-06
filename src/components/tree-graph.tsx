@@ -2,6 +2,8 @@ import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import {
   cluster,
   hierarchy,
+  HierarchyLink,
+  HierarchyNode,
   linkHorizontal,
   linkVertical,
   select,
@@ -45,7 +47,7 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
   const h = 300;
 
   useEffect(() => {
-    const nodes = hierarchy(data, (d) => d.children);
+    const nodes = hierarchy(data as TreeDataNode, (d) => d.children);
     select(svgRef.current).selectAll("g").remove();
     if (layout === "tree") {
       tree().size([w, h])(nodes);
@@ -61,7 +63,7 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
     nodes.count();
     setNoLeaves(nodes.value ?? 0);
 
-    nodes.sum((d) => 1);
+    nodes.sum(() => 1);
     setNoNodes(nodes.value ?? 0);
 
     const shift = [
@@ -88,27 +90,53 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
 
     if (layout === "radial") {
       g.selectAll("line")
-        .data(nodes.links())
+        .data<HierarchyLink<TreeDataNode>>(nodes.links())
         .enter()
         .append("line")
         .attr("stroke", "red")
         .attr("x1", (d) =>
-          hTransformation((d.source as any).y, (d.source as any).x)
+          hTransformation(
+            (d.source as HierarchyNode<TreeDataNode> & { x: number; y: number })
+              .y,
+            (d.source as HierarchyNode<TreeDataNode> & { x: number; y: number })
+              .x
+          )
         )
         .attr("y1", (d) =>
-          vTransformation((d.source as any).y, (d.source as any).x)
+          vTransformation(
+            (d.source as HierarchyNode<TreeDataNode> & { x: number; y: number })
+              .y,
+            (d.source as HierarchyNode<TreeDataNode> & { x: number; y: number })
+              .x
+          )
         )
         .attr("x2", (d) =>
-          hTransformation((d.target as any).y, (d.target as any).x)
+          hTransformation(
+            (d.target as HierarchyNode<TreeDataNode> & { x: number; y: number })
+              .y,
+            (d.target as HierarchyNode<TreeDataNode> & { x: number; y: number })
+              .x
+          )
         )
         .attr("y2", (d) =>
-          vTransformation((d.target as any).y, (d.target as any).x)
+          vTransformation(
+            (d.target as HierarchyNode<TreeDataNode> & { x: number; y: number })
+              .y,
+            (d.target as HierarchyNode<TreeDataNode> & { x: number; y: number })
+              .x
+          )
         );
     } else {
       const lineMaker = (
         orientation === "vertical"
-          ? linkVertical<any, { x: number; y: number }>()
-          : linkHorizontal<any, { x: number; y: number }>()
+          ? linkVertical<
+              HierarchyLink<TreeDataNode>,
+              { x: number; y: number }
+            >()
+          : linkHorizontal<
+              HierarchyLink<TreeDataNode>,
+              { x: number; y: number }
+            >()
       )
         .x(xAccessor)
         .y(yAccessor);
@@ -123,7 +151,7 @@ export const TreeGraph: FunctionComponent<TreeGraphProps> = ({
     }
 
     g.selectAll("circle")
-      .data<any>(nodes.descendants())
+      .data<HierarchyNode<TreeDataNode>>(nodes.descendants())
       .enter()
       .append("circle")
       .attr("r", 5)

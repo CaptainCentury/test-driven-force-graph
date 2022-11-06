@@ -15,8 +15,8 @@ export const BarPlot: FunctionComponent<BarPlotProps> = ({
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
 
   // define display
-  var w = 300;
-  var h = 300;
+  const w = 300;
+  const h = 300;
 
   useEffect(() => {
     const n = data.length;
@@ -45,7 +45,7 @@ export const BarPlot: FunctionComponent<BarPlotProps> = ({
       .delay((d, i) => 200 * i)
       .attr("x1", (_, i) => scaleX(i + 0.5))
       .attr("x2", (_, i) => scaleX(i + 0.5))
-      .each(function (d) {
+      .each(function () {
         const element = select(this);
         if (!element.attr("y1")) {
           element.attr("y1", scaleY(0)).attr("y2", scaleY(0));

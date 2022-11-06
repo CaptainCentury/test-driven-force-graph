@@ -2,7 +2,6 @@ import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import {
   axisLeft,
   bin,
-  extent,
   max,
   min,
   scaleBand,
@@ -29,8 +28,8 @@ export const Histogram: FunctionComponent<HistogramProps> = ({
 
   useEffect(() => {
     const histogram = bin()
-      .thresholds(thresholdScott(data, min(data), max(data)))
-      .value((d: any) => d)(data);
+      .thresholds(thresholdScott(data, min<number>(data), max<number>(data)))
+      .value((d) => d)(data);
     setNoBins(histogram.length);
 
     const xScale = scaleBand()
@@ -53,7 +52,7 @@ export const Histogram: FunctionComponent<HistogramProps> = ({
       .enter()
       .append("rect")
       .attr("width", xScale.bandwidth())
-      .attr("x", (d: any) => xScale(((d.x0 + d.x1) / 2).toString()))
+      .attr("x", (d) => xScale(((d.x0 + d.x1) / 2).toString()))
       .attr("y", (d) => yScale(d.length))
       .attr("height", (d) => h - yScale(d.length))
       .attr("fill", "red")

@@ -1,5 +1,12 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
-import { hierarchy, scaleOrdinal, schemeReds, select, treemap } from "d3";
+import {
+  hierarchy,
+  HierarchyNode,
+  scaleOrdinal,
+  schemeReds,
+  select,
+  treemap,
+} from "d3";
 
 type TreeDataNode = {
   size?: number;
@@ -25,7 +32,7 @@ export const TreeMap: FunctionComponent<TreeMapProps> = ({
 
   useEffect(() => {
     const scale = scaleOrdinal(schemeReds[8]);
-    const nodes = hierarchy(data)
+    const nodes = hierarchy<TreeDataNode>(data)
       .sum((d) => d.size)
       .sort((a, b) => b.height - a.height || b.value - a.value);
 
@@ -34,7 +41,7 @@ export const TreeMap: FunctionComponent<TreeMapProps> = ({
     nodes.count();
     setNoLeaves(nodes.value ?? 0);
 
-    nodes.sum((d) => 1);
+    nodes.sum(() => 1);
     setNoNodes(nodes.value ?? 0);
 
     const g = select(svgRef.current)
@@ -45,11 +52,24 @@ export const TreeMap: FunctionComponent<TreeMapProps> = ({
       .data(nodes.descendants())
       .enter()
       .append("rect")
-      .attr("x", (d: any) => d.x0)
-      .attr("y", (d: any) => d.y0)
-      .attr("width", (d: any) => d.x1 - d.x0)
-      .attr("height", (d: any) => d.y1 - d.y0)
-      .attr("fill", (d: any) => scale(d.depth))
+      .attr("x", (d: HierarchyNode<TreeDataNode> & { x0: number }) => d.x0)
+      .attr(
+        "y",
+        (d: HierarchyNode<TreeDataNode> & { x0: number; y0: number }) => d.y0
+      )
+      .attr(
+        "width",
+        (d: HierarchyNode<TreeDataNode> & { x0: number; x1: number }) =>
+          d.x1 - d.x0
+      )
+      .attr(
+        "height",
+        (d: HierarchyNode<TreeDataNode> & { y0: number; y1: number }) =>
+          d.y1 - d.y0
+      )
+      .attr("fill", (d: HierarchyNode<TreeDataNode> & { depth: string }) =>
+        scale(d.depth)
+      )
       .attr("stroke", "red");
 
     g.selectAll("text")
@@ -58,9 +78,25 @@ export const TreeMap: FunctionComponent<TreeMapProps> = ({
       .append("text")
       .attr("text-anchor", "middle")
       .attr("font-size", 10)
-      .attr("x", (d: any) => (d.x0 + d.x1) / 2)
-      .attr("y", (d: any) => (d.y0 + d.y1) / 2 + 2)
-      .text((d: any) => d.data.name);
+      .attr(
+        "x",
+        (d: HierarchyNode<TreeDataNode> & { x0: number; x1: number }) =>
+          (d.x0 + d.x1) / 2
+      )
+      .attr(
+        "y",
+        (d: HierarchyNode<TreeDataNode> & { y0: number; y1: number }) =>
+          (d.y0 + d.y1) / 2 + 2
+      )
+      .text(
+        (
+          d: HierarchyNode<TreeDataNode> & {
+            x0: number;
+            y0: number;
+            data: { name: string };
+          }
+        ) => d.data.name
+      );
   }, []);
 
   return (
