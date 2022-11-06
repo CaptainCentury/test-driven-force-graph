@@ -4,11 +4,10 @@ import {
   hierarchy,
   HierarchyLink,
   HierarchyNode,
-  linkHorizontal,
-  linkVertical,
   select,
   tree,
 } from "d3";
+import { linkHorizontal, linkVertical } from "d3-shape";
 
 type TreeDataNode = {
   children: TreeDataNode[];
