@@ -1,7 +1,6 @@
 import yarnballJson from "./network.json";
 
 const networkJsonToNetworkGraph = (json) => {
-  console.log(json);
   const nodes = new Set<string>();
   const edges = [];
   for (const relation of json["relations"]) {
@@ -13,14 +12,14 @@ const networkJsonToNetworkGraph = (json) => {
 
   const nodesList = Array.from(nodes);
   const nodesMap = new Map(nodesList.map((node, index) => [node, index]));
-  console.log(nodesMap);
 
   for (const relation of json["relations"]) {
     const relationObject = relation["object"];
     const relationSubject = relation["subject"];
+
     edges.push({
-      source: nodesMap[relationSubject],
-      target: nodesMap[relationObject],
+      source: nodesMap.get(relationSubject),
+      target: nodesMap.get(relationObject),
     });
   }
 
@@ -29,9 +28,6 @@ const networkJsonToNetworkGraph = (json) => {
       name: name,
     };
   });
-
-  console.log(namedNodes);
-  console.log(edges);
 
   return {
     nodes: namedNodes,
