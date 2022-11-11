@@ -1,1 +1,211 @@
-{"relations": [{"subject": "HGNC:11765", "predicate": "REL_9999", "object": "HGNC:11765", "overlap": 5202, "score": 4806, "local_mi": 25000812}, {"subject": "HGNC:11765", "predicate": "REL_9999", "object": "HGNC:11892", "overlap": 329, "score": 14, "local_mi": 4606}, {"subject": "HGNC:11765", "predicate": "REL_9999", "object": "HGNC:6018", "overlap": 279, "score": 9, "local_mi": 2511}, {"subject": "HGNC:11765", "predicate": "REL_9999", "object": "HGNC:6025", "overlap": 116, "score": 12, "local_mi": 1392}, {"subject": "HGNC:11765", "predicate": "REL_9999", "object": "HGNC:6596", "overlap": 9, "score": 19, "local_mi": 171}, {"subject": "HGNC:11892", "predicate": "REL_9999", "object": "HGNC:11765", "overlap": 329, "score": 14, "local_mi": 4606}, {"subject": "HGNC:11892", "predicate": "REL_9999", "object": "HGNC:11892", "overlap": 113912, "score": 219, "local_mi": 24946728}, {"subject": "HGNC:11892", "predicate": "REL_9999", "object": "HGNC:6018", "overlap": 30192, "score": 44, "local_mi": 1328448}, {"subject": "HGNC:11892", "predicate": "REL_9999", "object": "HGNC:6025", "overlap": 8765, "score": 43, "local_mi": 376895}, {"subject": "HGNC:11892", "predicate": "REL_9999", "object": "HGNC:6596", "overlap": 132, "score": 13, "local_mi": 1716}, {"subject": "HGNC:6018", "predicate": "REL_9999", "object": "HGNC:11765", "overlap": 279, "score": 9, "local_mi": 2511}, {"subject": "HGNC:6018", "predicate": "REL_9999", "object": "HGNC:11892", "overlap": 30192, "score": 44, "local_mi": 1328448}, {"subject": "HGNC:6018", "predicate": "REL_9999", "object": "HGNC:6018", "overlap": 149957, "score": 167, "local_mi": 25042819}, {"subject": "HGNC:6018", "predicate": "REL_9999", "object": "HGNC:6025", "overlap": 20529, "score": 77, "local_mi": 1580733}, {"subject": "HGNC:6018", "predicate": "REL_9999", "object": "HGNC:6596", "overlap": 580, "score": 43, "local_mi": 24940}, {"subject": "HGNC:6025", "predicate": "REL_9999", "object": "HGNC:11765", "overlap": 116, "score": 12, "local_mi": 1392}, {"subject": "HGNC:6025", "predicate": "REL_9999", "object": "HGNC:11892", "overlap": 8765, "score": 43, "local_mi": 376895}, {"subject": "HGNC:6025", "predicate": "REL_9999", "object": "HGNC:6018", "overlap": 20529, "score": 77, "local_mi": 1580733}, {"subject": "HGNC:6025", "predicate": "REL_9999", "object": "HGNC:6025", "overlap": 44676, "score": 560, "local_mi": 25018560}, {"subject": "HGNC:6025", "predicate": "REL_9999", "object": "HGNC:6596", "overlap": 51, "score": 13, "local_mi": 663}, {"subject": "HGNC:6596", "predicate": "REL_9999", "object": "HGNC:11765", "overlap": 9, "score": 19, "local_mi": 171}, {"subject": "HGNC:6596", "predicate": "REL_9999", "object": "HGNC:11892", "overlap": 132, "score": 13, "local_mi": 1716}, {"subject": "HGNC:6596", "predicate": "REL_9999", "object": "HGNC:6018", "overlap": 580, "score": 43, "local_mi": 24940}, {"subject": "HGNC:6596", "predicate": "REL_9999", "object": "HGNC:6025", "overlap": 51, "score": 13, "local_mi": 663}, {"subject": "HGNC:6596", "predicate": "REL_9999", "object": "HGNC:6596", "overlap": 2249, "score": 11116, "local_mi": 24999884}], "connectivity": {"HGNC:11765": 5, "HGNC:11892": 5, "HGNC:6018": 5, "HGNC:6025": 5, "HGNC:6596": 5}}
+{
+  "relations": [
+    {
+      "subject": "HGNC:11765",
+      "predicate": "REL_9999",
+      "object": "HGNC:11765",
+      "overlap": 5202,
+      "score": 4806,
+      "local_mi": 25000812
+    },
+    {
+      "subject": "HGNC:11765",
+      "predicate": "REL_9999",
+      "object": "HGNC:11892",
+      "overlap": 329,
+      "score": 14,
+      "local_mi": 4606
+    },
+    {
+      "subject": "HGNC:11765",
+      "predicate": "REL_9999",
+      "object": "HGNC:6018",
+      "overlap": 279,
+      "score": 9,
+      "local_mi": 2511
+    },
+    {
+      "subject": "HGNC:11765",
+      "predicate": "REL_9999",
+      "object": "HGNC:6025",
+      "overlap": 116,
+      "score": 12,
+      "local_mi": 1392
+    },
+    {
+      "subject": "HGNC:11765",
+      "predicate": "REL_9999",
+      "object": "HGNC:6596",
+      "overlap": 9,
+      "score": 19,
+      "local_mi": 171
+    },
+    {
+      "subject": "HGNC:11892",
+      "predicate": "REL_9999",
+      "object": "HGNC:11765",
+      "overlap": 329,
+      "score": 14,
+      "local_mi": 4606
+    },
+    {
+      "subject": "HGNC:11892",
+      "predicate": "REL_9999",
+      "object": "HGNC:11892",
+      "overlap": 113912,
+      "score": 219,
+      "local_mi": 24946728
+    },
+    {
+      "subject": "HGNC:11892",
+      "predicate": "REL_9999",
+      "object": "HGNC:6018",
+      "overlap": 30192,
+      "score": 44,
+      "local_mi": 1328448
+    },
+    {
+      "subject": "HGNC:11892",
+      "predicate": "REL_9999",
+      "object": "HGNC:6025",
+      "overlap": 8765,
+      "score": 43,
+      "local_mi": 376895
+    },
+    {
+      "subject": "HGNC:11892",
+      "predicate": "REL_9999",
+      "object": "HGNC:6596",
+      "overlap": 132,
+      "score": 13,
+      "local_mi": 1716
+    },
+    {
+      "subject": "HGNC:6018",
+      "predicate": "REL_9999",
+      "object": "HGNC:11765",
+      "overlap": 279,
+      "score": 9,
+      "local_mi": 2511
+    },
+    {
+      "subject": "HGNC:6018",
+      "predicate": "REL_9999",
+      "object": "HGNC:11892",
+      "overlap": 30192,
+      "score": 44,
+      "local_mi": 1328448
+    },
+    {
+      "subject": "HGNC:6018",
+      "predicate": "REL_9999",
+      "object": "HGNC:6018",
+      "overlap": 149957,
+      "score": 167,
+      "local_mi": 25042819
+    },
+    {
+      "subject": "HGNC:6018",
+      "predicate": "REL_9999",
+      "object": "HGNC:6025",
+      "overlap": 20529,
+      "score": 77,
+      "local_mi": 1580733
+    },
+    {
+      "subject": "HGNC:6018",
+      "predicate": "REL_9999",
+      "object": "HGNC:6596",
+      "overlap": 580,
+      "score": 43,
+      "local_mi": 24940
+    },
+    {
+      "subject": "HGNC:6025",
+      "predicate": "REL_9999",
+      "object": "HGNC:11765",
+      "overlap": 116,
+      "score": 12,
+      "local_mi": 1392
+    },
+    {
+      "subject": "HGNC:6025",
+      "predicate": "REL_9999",
+      "object": "HGNC:11892",
+      "overlap": 8765,
+      "score": 43,
+      "local_mi": 376895
+    },
+    {
+      "subject": "HGNC:6025",
+      "predicate": "REL_9999",
+      "object": "HGNC:6018",
+      "overlap": 20529,
+      "score": 77,
+      "local_mi": 1580733
+    },
+    {
+      "subject": "HGNC:6025",
+      "predicate": "REL_9999",
+      "object": "HGNC:6025",
+      "overlap": 44676,
+      "score": 560,
+      "local_mi": 25018560
+    },
+    {
+      "subject": "HGNC:6025",
+      "predicate": "REL_9999",
+      "object": "HGNC:6596",
+      "overlap": 51,
+      "score": 13,
+      "local_mi": 663
+    },
+    {
+      "subject": "HGNC:6596",
+      "predicate": "REL_9999",
+      "object": "HGNC:11765",
+      "overlap": 9,
+      "score": 19,
+      "local_mi": 171
+    },
+    {
+      "subject": "HGNC:6596",
+      "predicate": "REL_9999",
+      "object": "HGNC:11892",
+      "overlap": 132,
+      "score": 13,
+      "local_mi": 1716
+    },
+    {
+      "subject": "HGNC:6596",
+      "predicate": "REL_9999",
+      "object": "HGNC:6018",
+      "overlap": 580,
+      "score": 43,
+      "local_mi": 24940
+    },
+    {
+      "subject": "HGNC:6596",
+      "predicate": "REL_9999",
+      "object": "HGNC:6025",
+      "overlap": 51,
+      "score": 13,
+      "local_mi": 663
+    },
+    {
+      "subject": "HGNC:6596",
+      "predicate": "REL_9999",
+      "object": "HGNC:6596",
+      "overlap": 2249,
+      "score": 11116,
+      "local_mi": 24999884
+    }
+  ],
+  "connectivity": {
+    "HGNC:11765": 5,
+    "HGNC:11892": 5,
+    "HGNC:6018": 5,
+    "HGNC:6025": 5,
+    "HGNC:6596": 5
+  }
+}
