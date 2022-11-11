@@ -6,7 +6,7 @@ module.exports = {
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
   ],
-  ignorePatterns: ["dist/", "**/*.tsv", "**/webpack.config.js"],
+  ignorePatterns: ["dist/", "docs", "**/*.tsv", "**/webpack.config.js"],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: "module",
