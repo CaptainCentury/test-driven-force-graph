@@ -3,6 +3,8 @@
 ## Design
 
 - minimize core component dependencies (ideally just React and D3)
+- organize (for ForceGraph) component/story/data-helper in a self contained
+  directory that can be copied into applications components directory
 - possibly split plot into plot/plotter, graph/graphographer etc
 - implement general update pattern when good case turns up
   1. bind new data
