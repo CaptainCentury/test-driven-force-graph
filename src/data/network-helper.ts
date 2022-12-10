@@ -1,6 +1,6 @@
 import yarnballJson from "./network.json";
 
-const networkJsonToNetworkGraph = (json) => {
+const networkJsonToNetworkGraph = (json, labelReplacements) => {
   const nodes = new Set<string>();
   const edges = [];
   for (const relation of json["relations"]) {
@@ -31,7 +31,7 @@ const networkJsonToNetworkGraph = (json) => {
 
   const namedNodes = nodesList.map((name) => {
     return {
-      name: name,
+      name: labelReplacements[name] || name,
     };
   });
 
@@ -41,4 +41,11 @@ const networkJsonToNetworkGraph = (json) => {
   };
 };
 
-export const yarnball = networkJsonToNetworkGraph(yarnballJson);
+const uniProtLookup = {
+  "HGNC:11765": "P01135",
+  "HGNC:11892": "P01375",
+  "HGNC:6018": "P05231",
+  "HGNC:6025": "P10145",
+  "HGNC:6596": "P15018",
+};
+export const yarnball = networkJsonToNetworkGraph(yarnballJson, uniProtLookup);
