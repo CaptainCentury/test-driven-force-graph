@@ -13,13 +13,19 @@ const networkJsonToNetworkGraph = (json) => {
   const nodesList = Array.from(nodes);
   const nodesMap = new Map(nodesList.map((node, index) => [node, index]));
 
+  const maxOverlap = Math.max(
+    ...json["relations"].map((entry: { overlap: number }) => entry["overlap"])
+  );
+
   for (const relation of json["relations"]) {
     const relationObject = relation["object"];
     const relationSubject = relation["subject"];
+    const overlap = relation["overlap"];
 
     edges.push({
       source: nodesMap.get(relationSubject),
       target: nodesMap.get(relationObject),
+      weight: Math.log(overlap) / Math.log(maxOverlap),
     });
   }
 

@@ -40,6 +40,7 @@ type Edge = {
   target: GraphNode;
   x: number;
   y: number;
+  weight?: number;
 };
 
 type ForceGraphProps = {
@@ -153,7 +154,9 @@ const ForceGraph: FunctionComponent<ForceGraphProps> = ({
       .enter()
       .append("line")
       .style("stroke", "#ccc")
-      .style("stroke-width", 1);
+      .style("stroke-width", (d: Edge) => {
+        return d.weight ? 10 * d.weight : 1;
+      });
 
     const nodes = svg
       .selectAll("g")
